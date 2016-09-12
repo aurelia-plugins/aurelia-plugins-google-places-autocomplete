@@ -1,0 +1,26 @@
+{
+  "name": "aurelia-google-autocomplete",
+  "version": "1.0.0",
+  "description": "A Google Autocomplete plugin for Aurelia.",
+  "keywords": [
+    "aurelia",
+    "plugin",
+    "google",
+    "autocomplete"
+  ],
+  "homepage": "https://github.com/aurelia-plugins/aurelia-google-autocomplete",
+  "main": "dist/commonjs/aurelia-google-autocomplete.js",
+  "moduleType": "node",
+  "license": "MIT",
+  "authors": [
+    "Bart Lenaerts <bart@itprosolutions.be> (http://itprosolutions.be/)"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "http://github.com/aurelia-plugins/aurelia-google-autocomplete"
+  },
+  "dependencies": {
+    "aurelia-dependency-injection": "^1.0.0",
+    "aurelia-event-aggregator": "^1.0.0"
+  }
+}
