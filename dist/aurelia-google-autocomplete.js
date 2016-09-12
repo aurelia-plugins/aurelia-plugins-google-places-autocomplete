@@ -50,6 +50,10 @@ export class GoogleAutocomplete {
 
     if (!this._config.get('apiKey')) console.error('No API key has been specified.');
     if (this._config.get('loadApiScript')) this._loadApiScript();
+
+    this._eventAggregator.subscribe('google-autocomplete:clear', () => {
+      this.input.value = '';
+    });
   }
 
   // LIFECYCLE HANDLERS
