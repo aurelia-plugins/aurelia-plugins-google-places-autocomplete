@@ -68,7 +68,7 @@ export class GoogleAutocomplete {
   // PRIVATE METHODS
   async _initialize() {
     await this._scriptPromise;
-    var autocomplete = new window.google.maps.places.Autocomplete(this.input);
+    var autocomplete = new window.google.maps.places.Autocomplete(this.input, this._config.get('options'));
     this.disabled = false;
     autocomplete.addListener('place_changed', () => {
       var place = autocomplete.getPlace();

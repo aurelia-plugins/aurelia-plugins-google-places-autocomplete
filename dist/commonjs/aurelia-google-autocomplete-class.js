@@ -63,7 +63,7 @@ var GoogleAutocomplete = exports.GoogleAutocomplete = (_dec = (0, _aureliaDepend
               return this._scriptPromise;
 
             case 2:
-              autocomplete = new window.google.maps.places.Autocomplete(this.input);
+              autocomplete = new window.google.maps.places.Autocomplete(this.input, this._config.get('options'));
 
               this.disabled = false;
               autocomplete.addListener('place_changed', function () {

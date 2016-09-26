@@ -95,7 +95,7 @@ System.register(['aurelia-dependency-injection', 'aurelia-event-aggregator', './
                     return this._scriptPromise;
 
                   case 2:
-                    autocomplete = new window.google.maps.places.Autocomplete(this.input);
+                    autocomplete = new window.google.maps.places.Autocomplete(this.input, this._config.get('options'));
 
                     this.disabled = false;
                     autocomplete.addListener('place_changed', function () {

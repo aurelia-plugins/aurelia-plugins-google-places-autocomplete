@@ -37,7 +37,7 @@ export let GoogleAutocomplete = (_dec = inject(Element, Config, EventAggregator)
 
     return _asyncToGenerator(function* () {
       yield _this._scriptPromise;
-      var autocomplete = new window.google.maps.places.Autocomplete(_this.input);
+      var autocomplete = new window.google.maps.places.Autocomplete(_this.input, _this._config.get('options'));
       _this.disabled = false;
       autocomplete.addListener('place_changed', function () {
         var place = autocomplete.getPlace();
