@@ -1,11 +1,13 @@
 // IMPORTS
 import {inject} from 'aurelia-dependency-injection';
 import {EventAggregator} from 'aurelia-event-aggregator';
+import {customElement} from 'aurelia-templating';
 
 import {Config} from './aurelia-google-autocomplete-config';
 
 
 // CLASS ATTRIBUTES
+@customElement('google-autocomplete')
 @inject(Element, Config, EventAggregator)
 
 

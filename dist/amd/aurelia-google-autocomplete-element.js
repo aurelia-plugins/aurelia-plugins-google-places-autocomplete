@@ -1,4 +1,4 @@
-define(['exports', 'aurelia-dependency-injection', 'aurelia-event-aggregator', './aurelia-google-autocomplete-config'], function (exports, _aureliaDependencyInjection, _aureliaEventAggregator, _aureliaGoogleAutocompleteConfig) {
+define(['exports', 'aurelia-dependency-injection', 'aurelia-event-aggregator', 'aurelia-templating', './aurelia-google-autocomplete-config'], function (exports, _aureliaDependencyInjection, _aureliaEventAggregator, _aureliaTemplating, _aureliaGoogleAutocompleteConfig) {
   'use strict';
 
   Object.defineProperty(exports, "__esModule", {
@@ -43,9 +43,9 @@ define(['exports', 'aurelia-dependency-injection', 'aurelia-event-aggregator', '
 
   
 
-  var _dec, _class;
+  var _dec, _dec2, _class;
 
-  var GoogleAutocomplete = exports.GoogleAutocomplete = (_dec = (0, _aureliaDependencyInjection.inject)(Element, _aureliaGoogleAutocompleteConfig.Config, _aureliaEventAggregator.EventAggregator), _dec(_class = function () {
+  var GoogleAutocomplete = exports.GoogleAutocomplete = (_dec = (0, _aureliaTemplating.customElement)('google-autocomplete'), _dec2 = (0, _aureliaDependencyInjection.inject)(Element, _aureliaGoogleAutocompleteConfig.Config, _aureliaEventAggregator.EventAggregator), _dec(_class = _dec2(_class = function () {
     function GoogleAutocomplete(element, config, eventAggregator) {
       var _this = this;
 
@@ -153,5 +153,5 @@ define(['exports', 'aurelia-dependency-injection', 'aurelia-event-aggregator', '
     };
 
     return GoogleAutocomplete;
-  }()) || _class);
+  }()) || _class) || _class);
 });

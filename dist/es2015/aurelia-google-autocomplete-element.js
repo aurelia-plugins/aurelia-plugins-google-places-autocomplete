@@ -1,13 +1,14 @@
-var _dec, _class;
+var _dec, _dec2, _class;
 
 function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { return step("next", value); }, function (err) { return step("throw", err); }); } } return step("next"); }); }; }
 
 import { inject } from 'aurelia-dependency-injection';
 import { EventAggregator } from 'aurelia-event-aggregator';
+import { customElement } from 'aurelia-templating';
 
 import { Config } from './aurelia-google-autocomplete-config';
 
-export let GoogleAutocomplete = (_dec = inject(Element, Config, EventAggregator), _dec(_class = class GoogleAutocomplete {
+export let GoogleAutocomplete = (_dec = customElement('google-autocomplete'), _dec2 = inject(Element, Config, EventAggregator), _dec(_class = _dec2(_class = class GoogleAutocomplete {
   constructor(element, config, eventAggregator) {
     this._scriptPromise = null;
     this.disabled = true;
@@ -77,4 +78,4 @@ export let GoogleAutocomplete = (_dec = inject(Element, Config, EventAggregator)
 
     return false;
   }
-}) || _class);
+}) || _class) || _class);

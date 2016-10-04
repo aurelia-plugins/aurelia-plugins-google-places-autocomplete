@@ -1,5 +1,6 @@
 import {inject} from 'aurelia-dependency-injection';
 import {EventAggregator} from 'aurelia-event-aggregator';
+import {customElement} from 'aurelia-templating';
 
 // PUBLIC CLASS
 export class Config {
@@ -28,6 +29,7 @@ export class Config {
 
 // IMPORTS
 // CLASS ATTRIBUTES
+@customElement('google-autocomplete')
 @inject(Element, Config, EventAggregator)
 
 
@@ -109,10 +111,5 @@ export function configure(aurelia, configCallback) {
   var instance = aurelia.container.get(Config);
   if (configCallback !== undefined && typeof(configCallback) === 'function')
     configCallback(instance);
-  aurelia.globalResources('./aurelia-google-autocomplete-class');
+  aurelia.globalResources('./aurelia-google-autocomplete-element');
 }
-
-
-// PUBLIC CLASSES
-export {Config};
-export {GoogleAutocomplete}

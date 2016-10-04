@@ -7,13 +7,15 @@ exports.GoogleAutocomplete = exports.Config = undefined;
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
-var _dec, _class;
+var _dec, _dec2, _class;
 
 exports.configure = configure;
 
 var _aureliaDependencyInjection = require('aurelia-dependency-injection');
 
 var _aureliaEventAggregator = require('aurelia-event-aggregator');
+
+var _aureliaTemplating = require('aurelia-templating');
 
 function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { return step("next", value); }, function (err) { return step("throw", err); }); } } return step("next"); }); }; }
 
@@ -42,7 +44,7 @@ var Config = exports.Config = function () {
   return Config;
 }();
 
-var GoogleAutocomplete = exports.GoogleAutocomplete = (_dec = (0, _aureliaDependencyInjection.inject)(Element, Config, _aureliaEventAggregator.EventAggregator), _dec(_class = function () {
+var GoogleAutocomplete = exports.GoogleAutocomplete = (_dec = (0, _aureliaTemplating.customElement)('google-autocomplete'), _dec2 = (0, _aureliaDependencyInjection.inject)(Element, Config, _aureliaEventAggregator.EventAggregator), _dec(_class = _dec2(_class = function () {
   function GoogleAutocomplete(element, config, eventAggregator) {
     var _this = this;
 
@@ -150,12 +152,9 @@ var GoogleAutocomplete = exports.GoogleAutocomplete = (_dec = (0, _aureliaDepend
   };
 
   return GoogleAutocomplete;
-}()) || _class);
+}()) || _class) || _class);
 function configure(aurelia, configCallback) {
   var instance = aurelia.container.get(Config);
   if (configCallback !== undefined && typeof configCallback === 'function') configCallback(instance);
-  aurelia.globalResources('./aurelia-google-autocomplete-class');
+  aurelia.globalResources('./aurelia-google-autocomplete-element');
 }
-
-exports.Config = Config;
-exports.GoogleAutocomplete = GoogleAutocomplete;

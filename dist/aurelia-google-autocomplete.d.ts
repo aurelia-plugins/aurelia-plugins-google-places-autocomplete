@@ -4,6 +4,9 @@ import {
 import {
   EventAggregator
 } from 'aurelia-event-aggregator';
+import {
+  customElement
+} from 'aurelia-templating';
 
 // PUBLIC CLASS
 export declare class Config {
@@ -36,11 +39,3 @@ export declare class GoogleAutocomplete {
 // IMPORTS
 // PUBLIC METHODS
 export declare function configure(aurelia?: any, configCallback?: any): any;
-
-// PUBLIC CLASSES
-export declare {
-  Config
-};
-export declare {
-  GoogleAutocomplete
-};

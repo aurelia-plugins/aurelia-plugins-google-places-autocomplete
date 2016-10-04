@@ -1,9 +1,9 @@
 'use strict';
 
-System.register(['aurelia-dependency-injection', 'aurelia-event-aggregator', './aurelia-google-autocomplete-config'], function (_export, _context) {
+System.register(['aurelia-dependency-injection', 'aurelia-event-aggregator', 'aurelia-templating', './aurelia-google-autocomplete-config'], function (_export, _context) {
   "use strict";
 
-  var inject, EventAggregator, Config, _typeof, _dec, _class, GoogleAutocomplete;
+  var inject, EventAggregator, customElement, Config, _typeof, _dec, _dec2, _class, GoogleAutocomplete;
 
   function _asyncToGenerator(fn) {
     return function () {
@@ -41,6 +41,8 @@ System.register(['aurelia-dependency-injection', 'aurelia-event-aggregator', './
       inject = _aureliaDependencyInjection.inject;
     }, function (_aureliaEventAggregator) {
       EventAggregator = _aureliaEventAggregator.EventAggregator;
+    }, function (_aureliaTemplating) {
+      customElement = _aureliaTemplating.customElement;
     }, function (_aureliaGoogleAutocompleteConfig) {
       Config = _aureliaGoogleAutocompleteConfig.Config;
     }],
@@ -51,7 +53,7 @@ System.register(['aurelia-dependency-injection', 'aurelia-event-aggregator', './
         return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj;
       };
 
-      _export('GoogleAutocomplete', GoogleAutocomplete = (_dec = inject(Element, Config, EventAggregator), _dec(_class = function () {
+      _export('GoogleAutocomplete', GoogleAutocomplete = (_dec = customElement('google-autocomplete'), _dec2 = inject(Element, Config, EventAggregator), _dec(_class = _dec2(_class = function () {
         function GoogleAutocomplete(element, config, eventAggregator) {
           var _this = this;
 
@@ -159,7 +161,7 @@ System.register(['aurelia-dependency-injection', 'aurelia-event-aggregator', './
         };
 
         return GoogleAutocomplete;
-      }()) || _class));
+      }()) || _class) || _class));
 
       _export('GoogleAutocomplete', GoogleAutocomplete);
     }

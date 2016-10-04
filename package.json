@@ -1,6 +1,6 @@
 {
   "name": "aurelia-google-autocomplete",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "A Google Autocomplete plugin for Aurelia.",
   "keywords": [
     "aurelia",
@@ -30,17 +30,20 @@
     },
     "peerDependencies": {
       "aurelia-dependency-injection": "^1.0.0",
-      "aurelia-event-aggregator": "^1.0.0"
+      "aurelia-event-aggregator": "^1.0.0",
+      "aurelia-templating": "^1.1.0"
     },
     "dependencies": {
       "aurelia-dependency-injection": "^1.0.0",
-      "aurelia-event-aggregator": "^1.0.0"
+      "aurelia-event-aggregator": "^1.0.0",
+      "aurelia-templating": "^1.1.0"
     },
     "devDependencies": {}
   },
   "dependencies": {
     "aurelia-dependency-injection": "^1.0.0",
-    "aurelia-event-aggregator": "^1.0.0"
+    "aurelia-event-aggregator": "^1.0.0",
+    "aurelia-templating": "^1.1.0"
   },
   "devDependencies": {
     "aurelia-tools": "^0.2.4",
@@ -93,7 +96,7 @@
   "aurelia": {
     "build": {
       "resources": [
-        "aurelia-google-autocomplete/aurelia-google-autocomplete-class"
+        "aurelia-google-autocomplete/aurelia-google-autocomplete-element"
       ]
     },
     "documentation": {

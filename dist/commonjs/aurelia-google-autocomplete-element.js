@@ -1,17 +1,27 @@
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.GoogleAutocomplete = undefined;
+
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
-var _dec, _class;
+var _dec, _dec2, _class;
+
+var _aureliaDependencyInjection = require('aurelia-dependency-injection');
+
+var _aureliaEventAggregator = require('aurelia-event-aggregator');
+
+var _aureliaTemplating = require('aurelia-templating');
+
+var _aureliaGoogleAutocompleteConfig = require('./aurelia-google-autocomplete-config');
 
 function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { return step("next", value); }, function (err) { return step("throw", err); }); } } return step("next"); }); }; }
 
 
 
-import { inject } from 'aurelia-dependency-injection';
-import { EventAggregator } from 'aurelia-event-aggregator';
-
-import { Config } from './aurelia-google-autocomplete-config';
-
-export var GoogleAutocomplete = (_dec = inject(Element, Config, EventAggregator), _dec(_class = function () {
+var GoogleAutocomplete = exports.GoogleAutocomplete = (_dec = (0, _aureliaTemplating.customElement)('google-autocomplete'), _dec2 = (0, _aureliaDependencyInjection.inject)(Element, _aureliaGoogleAutocompleteConfig.Config, _aureliaEventAggregator.EventAggregator), _dec(_class = _dec2(_class = function () {
   function GoogleAutocomplete(element, config, eventAggregator) {
     var _this = this;
 
@@ -119,4 +129,4 @@ export var GoogleAutocomplete = (_dec = inject(Element, Config, EventAggregator)
   };
 
   return GoogleAutocomplete;
-}()) || _class);
+}()) || _class) || _class);
