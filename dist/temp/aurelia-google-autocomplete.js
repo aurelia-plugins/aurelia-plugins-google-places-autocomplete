@@ -25,7 +25,7 @@ var Config = exports.Config = function () {
   function Config() {
     _classCallCheck(this, Config);
 
-    this._config = { apiKey: '', apiLoadedEvent: 'googlemap:api:loaded', loadApiScript: true, options: { types: ['geocode'] } };
+    this._config = { apiKey: '', apiLoadedEvent: 'googlemap:api:loaded', language: 'en', loadApiScript: true, options: { types: ['geocode'] } };
   }
 
   Config.prototype.get = function get(key) {
@@ -121,7 +121,7 @@ var GoogleAutocomplete = exports.GoogleAutocomplete = (_dec = (0, _aureliaTempla
         var script = document.createElement('script');
         script.async = true;
         script.defer = true;
-        script.src = 'https://maps.googleapis.com/maps/api/js?key=' + _this4._config.get('apiKey') + '&libraries=places&callback=aureliaGoogleAutocompleteCallback';
+        script.src = 'https://maps.googleapis.com/maps/api/js?key=' + _this4._config.get('apiKey') + '&language=' + _this4._config.get('language') + '&libraries=places&callback=aureliaGoogleAutocompleteCallback';
         script.type = 'text/javascript';
         document.body.appendChild(script);
 

@@ -14,7 +14,7 @@ System.register([], function (_export, _context) {
         function Config() {
           
 
-          this._config = { apiKey: '', apiLoadedEvent: 'googlemap:api:loaded', loadApiScript: true, options: { types: ['geocode'] } };
+          this._config = { apiKey: '', apiLoadedEvent: 'googlemap:api:loaded', language: 'en', loadApiScript: true, options: { types: ['geocode'] } };
         }
 
         Config.prototype.get = function get(key) {

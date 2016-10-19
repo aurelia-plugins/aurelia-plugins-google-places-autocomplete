@@ -5,7 +5,7 @@ export class Config {
 
   // CONSTRUCTOR
   constructor() {
-    this._config = { apiKey: '', apiLoadedEvent: 'googlemap:api:loaded', loadApiScript: true, options: { types: ['geocode'] } };
+    this._config = { apiKey: '', apiLoadedEvent: 'googlemap:api:loaded', language: 'en', loadApiScript: true, options: { types: ['geocode'] } };
   }
 
   // PUBLIC METHODS

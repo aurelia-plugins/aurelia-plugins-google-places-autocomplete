@@ -49,6 +49,7 @@ export async function configure(aurelia) {
       config.options({
         apiKey: '', // your API key retrieved from the Google Developer Console
         apiLoadedEvent: 'googlemap:api:loaded', // if you don't load the Google Maps API script, the event that is triggered to know when the API is loaded
+        language: 'nl', //https://developers.google.com/maps/documentation/javascript/localization
         loadApiScript: true|false, // whether or not the <script> tag to the Google Maps API should be loaded
         options: { types: ['geocode'] } // https://developers.google.com/maps/documentation/javascript/places-autocomplete#add_autocomplete
       });
