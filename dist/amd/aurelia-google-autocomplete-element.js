@@ -122,7 +122,7 @@ define(['exports', 'aurelia-dependency-injection', 'aurelia-event-aggregator', '
           var script = document.createElement('script');
           script.async = true;
           script.defer = true;
-          script.src = 'https://maps.googleapis.com/maps/api/js?key=' + _this4._config.get('apiKey') + '&language=' + _this4._config.get('language') + '&libraries=places&callback=aureliaGoogleAutocompleteCallback';
+          script.src = 'https://maps.googleapis.com/maps/api/js?key=' + _this4._config.get('apiKey') + '&libraries=' + _this4._config.get('apiLibraries') + '&language=' + _this4._config.get('language') + '&callback=aureliaGoogleAutocompleteCallback';
           script.type = 'text/javascript';
           document.body.appendChild(script);
 

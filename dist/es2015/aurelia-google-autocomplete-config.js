@@ -1,7 +1,7 @@
 
 export let Config = class Config {
   constructor() {
-    this._config = { apiKey: '', apiLoadedEvent: 'googlemap:api:loaded', language: 'en', loadApiScript: true, options: { types: ['geocode'] } };
+    this._config = { apiKey: '', apiLibraries: 'places', apiLoadedEvent: 'googlemap:api:loaded', language: 'en', loadApiScript: true, options: { types: ['geocode'] } };
   }
 
   get(key) {
