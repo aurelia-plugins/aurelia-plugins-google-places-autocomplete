@@ -68,7 +68,10 @@ export class GoogleAutocomplete {
       document.body.appendChild(script);
 
       this._scriptPromise = new Promise((resolve, reject) => {
-        window.aureliaGoogleAutocompleteCallback = () => { resolve(); };
+        window.aureliaGoogleAutocompleteCallback = () => {
+          this._eventAggregator.publish('google-autocomplete:api_loaded', this._scriptPromise);
+          resolve();
+        };
         script.onerror = error => { reject(error); };
       });
       return this._scriptPromise;

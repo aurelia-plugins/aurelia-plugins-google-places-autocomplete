@@ -136,6 +136,7 @@ System.register(['aurelia-dependency-injection', 'aurelia-event-aggregator', 'au
 
               _this4._scriptPromise = new Promise(function (resolve, reject) {
                 window.aureliaGoogleAutocompleteCallback = function () {
+                  _this4._eventAggregator.publish('google-autocomplete:api_loaded', _this4._scriptPromise);
                   resolve();
                 };
                 script.onerror = function (error) {

@@ -104,6 +104,7 @@ var GoogleAutocomplete = exports.GoogleAutocomplete = (_dec = (0, _aureliaTempla
 
         _this4._scriptPromise = new Promise(function (resolve, reject) {
           window.aureliaGoogleAutocompleteCallback = function () {
+            _this4._eventAggregator.publish('google-autocomplete:api_loaded', _this4._scriptPromise);
             resolve();
           };
           script.onerror = function (error) {

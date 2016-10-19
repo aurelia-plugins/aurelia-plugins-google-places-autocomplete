@@ -64,6 +64,11 @@ export async function configure(aurelia) {
 
 Once Google Autocomplete is configured, to use it simply add the custom element `<google-autocomplete></google-autocomplete>` in your view.
 
+### Google API loaded
+
+The `google-autocomplete:api_loaded` event is published when the Google API is completely loaded.
+
+
 ### Get the place
 
 To get the place information, subscribe to the event `google-autocomplete:place_changed` in your viewmodel. The complete [`PlaceResult`](https://developers.google.com/maps/documentation/javascript/places#place_details_results) object from Google is returned.
