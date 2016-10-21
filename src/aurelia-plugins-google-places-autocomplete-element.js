@@ -3,11 +3,11 @@ import {inject} from 'aurelia-dependency-injection';
 import {EventAggregator} from 'aurelia-event-aggregator';
 import {customElement} from 'aurelia-templating';
 
-import {Config} from './aurelia-google-autocomplete-config';
+import {Config} from './aurelia-plugins-google-places-autocomplete-config';
 
 
 // CLASS ATTRIBUTES
-@customElement('google-autocomplete')
+@customElement('aup-google-places-autocomplete')
 @inject(Element, Config, EventAggregator)
 
 
@@ -24,22 +24,17 @@ export class GoogleAutocomplete {
 
   // CONSTRUCTOR
   constructor(element, config, eventAggregator) {
-    this._element = element;
     this._config = config;
+    this._element = element;
     this._eventAggregator = eventAggregator;
 
-    if (!this._config.get('apiKey')) console.error('No API key has been specified.');
-    if (this._config.get('loadApiScript')) this._loadApiScript();
+    if (!this._config.get('key')) return console.error('No Google API key has been specified.');
 
-    this._eventAggregator.subscribe('google-autocomplete:clear', () => {
-      this.input.value = '';
-    });
-  }
+    this._eventAggregator.subscribe('aurelia-plugins:google-places-autocomplete:clear', () => { this.input.value = ''; });
 
-  // LIFECYCLE HANDLERS
-  attached() {
-    if (this._config.get('loadApiScript')) return this._initialize();
-    this._eventAggregator.subscribe(this._config.get('apiLoadedEvent'), scriptPromise => {
+    if (this._config.get('loadApiScript')) { this._loadApiScript(); return this._initialize(); }
+
+    this._eventAggregator.subscribe(this._config.get('apiScriptLoadedEvent'), scriptPromise => {
       this._scriptPromise = scriptPromise;
       this._initialize();
     });
@@ -52,7 +47,7 @@ export class GoogleAutocomplete {
     this.disabled = false;
     autocomplete.addListener('place_changed', () => {
       var place = autocomplete.getPlace();
-      if (place) this._eventAggregator.publish('google-autocomplete:place_changed', place);
+      if (place) this._eventAggregator.publish('aurelia-plugins:google-places-autocomplete:place-changed', place);
     });
   }
 
@@ -60,16 +55,16 @@ export class GoogleAutocomplete {
     if (this._scriptPromise) return this._scriptPromise;
 
     if (window.google === undefined || window.google.maps === undefined) {
-      let script = document.createElement('script');
+      var script = document.createElement('script');
       script.async = true;
       script.defer = true;
-      script.src = 'https://maps.googleapis.com/maps/api/js?key=' + this._config.get('apiKey') + '&libraries=' + this._config.get('apiLibraries') + '&language=' + this._config.get('language') + '&callback=aureliaGoogleAutocompleteCallback';
+      script.src = 'https://maps.googleapis.com/maps/api/js?key=' + this._config.get('key') + '&libraries=' + this._config.get('libraries') + '&language=' + this._config.get('language') + '&callback=aureliaPluginsGooglePlacesAutocompleteCallback';
       script.type = 'text/javascript';
       document.body.appendChild(script);
 
       this._scriptPromise = new Promise((resolve, reject) => {
-        window.aureliaGoogleAutocompleteCallback = () => {
-          this._eventAggregator.publish('google-autocomplete:api_loaded', this._scriptPromise);
+        window.aureliaPluginsGooglePlacesAutocompleteCallback = () => {
+          this._eventAggregator.publish('aurelia-plugins:google-places-autocomplete:api-script-loaded', this._scriptPromise);
           resolve();
         };
         script.onerror = error => { reject(error); };

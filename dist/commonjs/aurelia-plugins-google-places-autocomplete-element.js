@@ -5,8 +5,6 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.GoogleAutocomplete = undefined;
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
-
 var _dec, _dec2, _class;
 
 var _aureliaDependencyInjection = require('aurelia-dependency-injection');
@@ -15,13 +13,13 @@ var _aureliaEventAggregator = require('aurelia-event-aggregator');
 
 var _aureliaTemplating = require('aurelia-templating');
 
-var _aureliaGoogleAutocompleteConfig = require('./aurelia-google-autocomplete-config');
+var _aureliaPluginsGooglePlacesAutocompleteConfig = require('./aurelia-plugins-google-places-autocomplete-config');
 
 function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { return step("next", value); }, function (err) { return step("throw", err); }); } } return step("next"); }); }; }
 
 
 
-var GoogleAutocomplete = exports.GoogleAutocomplete = (_dec = (0, _aureliaTemplating.customElement)('google-autocomplete'), _dec2 = (0, _aureliaDependencyInjection.inject)(Element, _aureliaGoogleAutocompleteConfig.Config, _aureliaEventAggregator.EventAggregator), _dec(_class = _dec2(_class = function () {
+var GoogleAutocomplete = exports.GoogleAutocomplete = (_dec = (0, _aureliaTemplating.customElement)('aup-google-places-autocomplete'), _dec2 = (0, _aureliaDependencyInjection.inject)(Element, _aureliaPluginsGooglePlacesAutocompleteConfig.Config, _aureliaEventAggregator.EventAggregator), _dec(_class = _dec2(_class = function () {
   function GoogleAutocomplete(element, config, eventAggregator) {
     var _this = this;
 
@@ -30,31 +28,29 @@ var GoogleAutocomplete = exports.GoogleAutocomplete = (_dec = (0, _aureliaTempla
     this._scriptPromise = null;
     this.disabled = true;
 
-    this._element = element;
     this._config = config;
+    this._element = element;
     this._eventAggregator = eventAggregator;
 
-    if (!this._config.get('apiKey')) console.error('No API key has been specified.');
-    if (this._config.get('loadApiScript')) this._loadApiScript();
+    if (!this._config.get('key')) return console.error('No Google API key has been specified.');
 
-    this._eventAggregator.subscribe('google-autocomplete:clear', function () {
+    this._eventAggregator.subscribe('aurelia-plugins:google-places-autocomplete:clear', function () {
       _this.input.value = '';
+    });
+
+    if (this._config.get('loadApiScript')) {
+      this._loadApiScript();return this._initialize();
+    }
+
+    this._eventAggregator.subscribe(this._config.get('apiScriptLoadedEvent'), function (scriptPromise) {
+      _this._scriptPromise = scriptPromise;
+      _this._initialize();
     });
   }
 
-  GoogleAutocomplete.prototype.attached = function attached() {
-    var _this2 = this;
-
-    if (this._config.get('loadApiScript')) return this._initialize();
-    this._eventAggregator.subscribe(this._config.get('apiLoadedEvent'), function (scriptPromise) {
-      _this2._scriptPromise = scriptPromise;
-      _this2._initialize();
-    });
-  };
-
   GoogleAutocomplete.prototype._initialize = function () {
     var _ref = _asyncToGenerator(regeneratorRuntime.mark(function _callee() {
-      var _this3 = this;
+      var _this2 = this;
 
       var autocomplete;
       return regeneratorRuntime.wrap(function _callee$(_context) {
@@ -70,7 +66,7 @@ var GoogleAutocomplete = exports.GoogleAutocomplete = (_dec = (0, _aureliaTempla
               this.disabled = false;
               autocomplete.addListener('place_changed', function () {
                 var place = autocomplete.getPlace();
-                if (place) _this3._eventAggregator.publish('google-autocomplete:place_changed', place);
+                if (place) _this2._eventAggregator.publish('aurelia-plugins:google-places-autocomplete:place-changed', place);
               });
 
             case 5:
@@ -89,34 +85,28 @@ var GoogleAutocomplete = exports.GoogleAutocomplete = (_dec = (0, _aureliaTempla
   }();
 
   GoogleAutocomplete.prototype._loadApiScript = function _loadApiScript() {
-    var _this4 = this;
+    var _this3 = this;
 
     if (this._scriptPromise) return this._scriptPromise;
 
     if (window.google === undefined || window.google.maps === undefined) {
-      var _ret = function () {
-        var script = document.createElement('script');
-        script.async = true;
-        script.defer = true;
-        script.src = 'https://maps.googleapis.com/maps/api/js?key=' + _this4._config.get('apiKey') + '&libraries=' + _this4._config.get('apiLibraries') + '&language=' + _this4._config.get('language') + '&callback=aureliaGoogleAutocompleteCallback';
-        script.type = 'text/javascript';
-        document.body.appendChild(script);
+      var script = document.createElement('script');
+      script.async = true;
+      script.defer = true;
+      script.src = 'https://maps.googleapis.com/maps/api/js?key=' + this._config.get('key') + '&libraries=' + this._config.get('libraries') + '&language=' + this._config.get('language') + '&callback=aureliaPluginsGooglePlacesAutocompleteCallback';
+      script.type = 'text/javascript';
+      document.body.appendChild(script);
 
-        _this4._scriptPromise = new Promise(function (resolve, reject) {
-          window.aureliaGoogleAutocompleteCallback = function () {
-            _this4._eventAggregator.publish('google-autocomplete:api_loaded', _this4._scriptPromise);
-            resolve();
-          };
-          script.onerror = function (error) {
-            reject(error);
-          };
-        });
-        return {
-          v: _this4._scriptPromise
+      this._scriptPromise = new Promise(function (resolve, reject) {
+        window.aureliaPluginsGooglePlacesAutocompleteCallback = function () {
+          _this3._eventAggregator.publish('aurelia-plugins:google-places-autocomplete:api-script-loaded', _this3._scriptPromise);
+          resolve();
         };
-      }();
-
-      if ((typeof _ret === 'undefined' ? 'undefined' : _typeof(_ret)) === "object") return _ret.v;
+        script.onerror = function (error) {
+          reject(error);
+        };
+      });
+      return this._scriptPromise;
     }
 
     if (window.google && window.google.maps) {

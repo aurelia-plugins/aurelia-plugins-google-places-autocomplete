@@ -1,25 +1,25 @@
-# aurelia-google-autocomplete
+# aurelia-plugins-google-places-autocomplete
 
-A Google Autocomplete plugin for Aurelia.
+A Google Places Autocomplete plugin for Aurelia.
 
 ## Installation
 
 **Webpack/Aurelia CLI**
 
 ```shell
-npm install aurelia-google-autocomplete --save
+npm install aurelia-plugins-google-places-autocomplete --save
 ```
 
 **JSPM**
 
 ```shell
-jspm install aurelia-google-autocomplete
+jspm install aurelia-plugins-google-places-autocomplete
 ```
 
 **Bower**
 
 ```shell
-bower install aurelia-google-autocomplete
+bower install aurelia-plugins-google-places-autocomplete
 ```
 
 ## Configuration
@@ -30,7 +30,7 @@ Add to `package.json`
   "aurelia": {
     "build": {
       "resources": [
-        "aurelia-google-autocomplete"
+        "aurelia-plugins-google-places-autocomplete"
       ]
     }
   }
@@ -45,14 +45,14 @@ export async function configure(aurelia) {
     .developmentLogging();
 
   aurelia.use
-    .plugin('aurelia-google-autocomplete', config => {
+    .plugin('aurelia-plugins-google-places-autocomplete', config => {
       config.options({
-        apiKey: '', // your API key retrieved from the Google Developer Console
-        apiLibraries: 'places', // https://developers.google.com/maps/documentation/javascript/libraries
-        apiLoadedEvent: 'googlemap:api:loaded', // if you don't load the Google Maps API script, the event that is triggered to know when the API is loaded
-        language: 'nl', //https://developers.google.com/maps/documentation/javascript/localization
-        loadApiScript: true|false, // whether or not the <script> tag to the Google Maps API should be loaded
-        options: { types: ['geocode'] } // https://developers.google.com/maps/documentation/javascript/places-autocomplete#add_autocomplete
+        apiScriptLoadedEvent: 'aurelia-plugins:google-maps:api-script-loaded', // if loadApiScript is false, the event that is published to know when the Google Maps API is completely loaded
+        key: '', // your Google API key retrieved from the Google Developer Console
+        language: 'nl', // see https://developers.google.com/maps/documentation/javascript/localization
+        libraries: 'places', // see https://developers.google.com/maps/documentation/javascript/libraries
+        loadApiScript: true|false, // whether or not the <script> tag of the Google Maps API should be loaded
+        options: { types: ['geocode'] } // see https://developers.google.com/maps/documentation/javascript/places-autocomplete#add_autocomplete
       });
     });
 
@@ -63,20 +63,40 @@ export async function configure(aurelia) {
 
 ## Usage
 
-Once Google Autocomplete is configured, to use it simply add the custom element `<google-autocomplete></google-autocomplete>` in your view.
+Once Google Places Autocomplete is configured, to use it simply add the custom element `<aup-google-places-autocomplete></aup-google-places-autocomplete>` in your view.
 
 ### Google API loaded
 
-The `google-autocomplete:api_loaded` event is published when the Google API is completely loaded.
+The `aurelia-plugins:google-places-autocomplete:api-script-loaded` event is published when the Google API Script is completely loaded.
 
 
 ### Get the place
 
-To get the place information, subscribe to the event `google-autocomplete:place_changed` in your viewmodel. The complete [`PlaceResult`](https://developers.google.com/maps/documentation/javascript/places#place_details_results) object from Google is returned.
+To get the place information, subscribe to the event `aurelia-plugins:google-places-autocomplete:place-changed` in your viewmodel. The complete [`PlaceResult`](<https://developers.google.com/maps/documentation/javascript/places#place_details_results>) object from Google is returned.
 
 ```html
-<google-autocomplete></google-autocomplete>
+<aup-google-places-autocomplete></aup-google-places-autocomplete>
 ```
+
+```javascript
+import {EventAggregator} from 'aurelia-event-aggregator';
+import {inject} from 'aurelia-framework';
+
+@inject(EventAggregator)
+export class App {
+  constructor(eventAggregator) {
+    this.eventAggregator = eventAggregator;
+
+    this.eventAggregator.subscribe('aurelia-plugins:google-places-autocomplete:place-changed', place => {
+    	console.log(place);
+    });
+  }
+}
+````
+
+### Clear the place
+
+To clear the input on the Google Places Autocomplete, publish the event `aurelia-plugins:google-places-autocomplete:clear`.
 
 ```javascript
 import {EventAggregator} from 'aurelia-event-aggregator';
@@ -88,10 +108,8 @@ export class App {
     this.eventAggregator = eventAggregator;
   }
 
-  attached() { 
-    this.eventAggregator.subscribe('google-autocomplete:place_changed', place => {
-    	console.log(place);
-    });
+  onClick() {
+    this.eventAggregator.publish('aurelia-plugins:google-places-autocomplete:clear');
   }
 }
-````
+```

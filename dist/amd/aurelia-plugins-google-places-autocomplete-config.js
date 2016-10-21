@@ -11,7 +11,7 @@ define(['exports'], function (exports) {
     function Config() {
       
 
-      this._config = { apiKey: '', apiLibraries: 'places', apiLoadedEvent: 'googlemap:api:loaded', language: 'en', loadApiScript: true, options: { types: ['geocode'] } };
+      this._config = { apiScriptLoadedEvent: 'aurelia-plugins:google-maps:api-script-loaded', key: '', language: 'en', libraries: 'places', loadApiScript: true, options: { types: ['geocode'] } };
     }
 
     Config.prototype.get = function get(key) {

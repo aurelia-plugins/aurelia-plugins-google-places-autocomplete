@@ -31,9 +31,6 @@ export declare class GoogleAutocomplete {
   
   // CONSTRUCTOR
   constructor(element?: any, config?: any, eventAggregator?: any);
-  
-  // LIFECYCLE HANDLERS
-  attached(): any;
 }
 
 // IMPORTS

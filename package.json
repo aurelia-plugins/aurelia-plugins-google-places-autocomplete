@@ -1,24 +1,26 @@
 {
-  "name": "aurelia-google-autocomplete",
-  "version": "1.1.6",
-  "description": "A Google Autocomplete plugin for Aurelia.",
+  "name": "aurelia-plugins-google-places-autocomplete",
+  "version": "1.2.0",
+  "description": "A Google Places Autocomplete plugin for Aurelia.",
   "keywords": [
     "aurelia",
+    "plugins",
     "plugin",
     "google",
+    "places",
     "autocomplete"
   ],
-  "homepage": "https://github.com/aurelia-plugins/aurelia-google-autocomplete",
+  "homepage": "https://github.com/aurelia-plugins/aurelia-plugins-google-places-autocomplete",
   "bugs": {
-    "url": "https://github.com/aurelia-plugins/aurelia-google-autocomplete/issues"
+    "url": "https://github.com/aurelia-plugins/aurelia-plugins-google-places-autocomplete/issues"
   },
   "license": "MIT",
   "author": "Bart Lenaerts <bart@itprosolutions.be> (http://itprosolutions.be/)",
-  "main": "dist/commonjs/aurelia-google-autocomplete.js",
-  "typings": "dist/aurelia-google-autocomplete.d.ts",
+  "main": "dist/commonjs/aurelia-plugins-google-places-autocomplete.js",
+  "typings": "dist/aurelia-plugins-google-places-autocomplete.d.ts",
   "repository": {
     "type": "git",
-    "url": "http://github.com/aurelia-plugins/aurelia-google-autocomplete"
+    "url": "http://github.com/aurelia-plugins/aurelia-plugins-google-places-autocomplete"
   },
   "jspm": {
     "registry": "npm",
@@ -29,21 +31,21 @@
       "dist": "dist/amd"
     },
     "peerDependencies": {
-      "aurelia-dependency-injection": "^1.0.0",
+      "aurelia-dependency-injection": "^1.2.0",
       "aurelia-event-aggregator": "^1.0.0",
-      "aurelia-templating": "^1.1.0"
+      "aurelia-templating": "^1.1.2"
     },
     "dependencies": {
-      "aurelia-dependency-injection": "^1.0.0",
+      "aurelia-dependency-injection": "^1.2.0",
       "aurelia-event-aggregator": "^1.0.0",
-      "aurelia-templating": "^1.1.0"
+      "aurelia-templating": "^1.1.2"
     },
     "devDependencies": {}
   },
   "dependencies": {
-    "aurelia-dependency-injection": "^1.0.0",
+    "aurelia-dependency-injection": "^1.2.0",
     "aurelia-event-aggregator": "^1.0.0",
-    "aurelia-templating": "^1.1.0"
+    "aurelia-templating": "^1.1.2"
   },
   "devDependencies": {
     "aurelia-tools": "^0.2.4",
@@ -96,7 +98,7 @@
   "aurelia": {
     "build": {
       "resources": [
-        "aurelia-google-autocomplete/aurelia-google-autocomplete-element"
+        "aurelia-plugins-google-places-autocomplete/aurelia-plugins-google-places-autocomplete-element"
       ]
     },
     "documentation": {
