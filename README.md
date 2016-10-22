@@ -129,11 +129,16 @@ If you place the Google Places Autocomplete in a form that will be submitted, no
 export class App {
   value = null;
   
-  onSubmit() {
-    var geocoder = window.google.maps.Geocoder;
-    geocoder.geocode({ address: this.value }, (results, status) => {
-      if (status !== window.google.maps.GeocoderStatus.OK) return;
-      console.log(results[0].geometry.location);
+  async onSubmit() {
+    var place = await this.geocode(this.value);
+    console.log(place);
+  }
+  
+  geocode(value) {
+    return new Promise((resolve, reject) => {
+      new google.maps.Geocoder().geocode({ address: value }, (results, status) => {
+        status === google.maps.GeocoderStatus.OK ? resolve(results[0]) : reject();
+      });
     });
   }
 }
