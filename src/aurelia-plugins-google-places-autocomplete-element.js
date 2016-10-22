@@ -1,7 +1,8 @@
 // IMPORTS
+import {bindingMode} from 'aurelia-binding';
 import {inject} from 'aurelia-dependency-injection';
 import {EventAggregator} from 'aurelia-event-aggregator';
-import {customElement} from 'aurelia-templating';
+import {bindable, customElement} from 'aurelia-templating';
 
 import {Config} from './aurelia-plugins-google-places-autocomplete-config';
 
@@ -19,6 +20,9 @@ export class GoogleAutocomplete {
   _eventAggregator;
   _scriptPromise = null;
 
+  // BINDABLE PROPERTIES
+  @bindable({ defaultBindingMode: bindingMode.twoWay }) value;
+
   // PUBLIC PROPERTIES
   disabled = true;
 
@@ -33,7 +37,6 @@ export class GoogleAutocomplete {
     this._eventAggregator.subscribe('aurelia-plugins:google-places-autocomplete:clear', () => { this.input.value = ''; });
 
     if (this._config.get('loadApiScript')) { this._loadApiScript(); return this._initialize(); }
-
     this._eventAggregator.subscribe(this._config.get('apiScriptLoadedEvent'), scriptPromise => {
       this._scriptPromise = scriptPromise;
       this._initialize();
@@ -58,7 +61,7 @@ export class GoogleAutocomplete {
       var script = document.createElement('script');
       script.async = true;
       script.defer = true;
-      script.src = 'https://maps.googleapis.com/maps/api/js?key=' + this._config.get('key') + '&libraries=' + this._config.get('libraries') + '&language=' + this._config.get('language') + '&callback=aureliaPluginsGooglePlacesAutocompleteCallback';
+      script.src = `https://maps.googleapis.com/maps/api/js?callback=aureliaPluginsGooglePlacesAutocompleteCallback&key=${this._config.get('key')}&language=${this._config.get('language')}&libraries=${this._config.get('libraries')}`;
       script.type = 'text/javascript';
       document.body.appendChild(script);
 

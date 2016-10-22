@@ -5,7 +5,14 @@ export class Config {
 
   // CONSTRUCTOR
   constructor() {
-    this._config = { apiScriptLoadedEvent: 'aurelia-plugins:google-maps:api-script-loaded', key: '', language: 'en', libraries: 'places', loadApiScript: true, options: { types: ['geocode'] } };
+    this._config = {
+      apiScriptLoadedEvent: 'aurelia-plugins:google-maps:api-script-loaded',
+      key: '',
+      language: 'en',
+      libraries: 'places',
+      loadApiScript: true,
+      options: { types: ['geocode'] }
+    };
   }
 
   // PUBLIC METHODS

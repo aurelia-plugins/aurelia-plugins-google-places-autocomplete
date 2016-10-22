@@ -1,10 +1,14 @@
 import {
+  bindingMode
+} from 'aurelia-binding';
+import {
   inject
 } from 'aurelia-dependency-injection';
 import {
   EventAggregator
 } from 'aurelia-event-aggregator';
 import {
+  bindable,
   customElement
 } from 'aurelia-templating';
 
@@ -25,6 +29,7 @@ export declare class Config {
 // IMPORTS
 // CLASS ATTRIBUTES
 export declare class GoogleAutocomplete {
+  value: any;
   
   // PUBLIC PROPERTIES
   disabled: any;

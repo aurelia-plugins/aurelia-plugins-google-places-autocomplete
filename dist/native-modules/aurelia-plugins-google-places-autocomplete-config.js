@@ -4,7 +4,14 @@ export var Config = function () {
   function Config() {
     
 
-    this._config = { apiScriptLoadedEvent: 'aurelia-plugins:google-maps:api-script-loaded', key: '', language: 'en', libraries: 'places', loadApiScript: true, options: { types: ['geocode'] } };
+    this._config = {
+      apiScriptLoadedEvent: 'aurelia-plugins:google-maps:api-script-loaded',
+      key: '',
+      language: 'en',
+      libraries: 'places',
+      loadApiScript: true,
+      options: { types: ['geocode'] }
+    };
   }
 
   Config.prototype.get = function get(key) {

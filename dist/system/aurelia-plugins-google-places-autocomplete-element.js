@@ -1,9 +1,9 @@
 'use strict';
 
-System.register(['aurelia-dependency-injection', 'aurelia-event-aggregator', 'aurelia-templating', './aurelia-plugins-google-places-autocomplete-config'], function (_export, _context) {
+System.register(['aurelia-binding', 'aurelia-dependency-injection', 'aurelia-event-aggregator', 'aurelia-templating', './aurelia-plugins-google-places-autocomplete-config'], function (_export, _context) {
   "use strict";
 
-  var inject, EventAggregator, customElement, Config, _dec, _dec2, _class, GoogleAutocomplete;
+  var bindingMode, inject, EventAggregator, bindable, customElement, Config, _dec, _dec2, _dec3, _class, _desc, _value, _class2, _descriptor, GoogleAutocomplete;
 
   function _asyncToGenerator(fn) {
     return function () {
@@ -34,26 +34,75 @@ System.register(['aurelia-dependency-injection', 'aurelia-event-aggregator', 'au
     };
   }
 
+  function _initDefineProp(target, property, descriptor, context) {
+    if (!descriptor) return;
+    Object.defineProperty(target, property, {
+      enumerable: descriptor.enumerable,
+      configurable: descriptor.configurable,
+      writable: descriptor.writable,
+      value: descriptor.initializer ? descriptor.initializer.call(context) : void 0
+    });
+  }
+
   
 
+  function _applyDecoratedDescriptor(target, property, decorators, descriptor, context) {
+    var desc = {};
+    Object['ke' + 'ys'](descriptor).forEach(function (key) {
+      desc[key] = descriptor[key];
+    });
+    desc.enumerable = !!desc.enumerable;
+    desc.configurable = !!desc.configurable;
+
+    if ('value' in desc || desc.initializer) {
+      desc.writable = true;
+    }
+
+    desc = decorators.slice().reverse().reduce(function (desc, decorator) {
+      return decorator(target, property, desc) || desc;
+    }, desc);
+
+    if (context && desc.initializer !== void 0) {
+      desc.value = desc.initializer ? desc.initializer.call(context) : void 0;
+      desc.initializer = undefined;
+    }
+
+    if (desc.initializer === void 0) {
+      Object['define' + 'Property'](target, property, desc);
+      desc = null;
+    }
+
+    return desc;
+  }
+
+  function _initializerWarningHelper(descriptor, context) {
+    throw new Error('Decorating class property failed. Please ensure that transform-class-properties is enabled.');
+  }
+
   return {
-    setters: [function (_aureliaDependencyInjection) {
+    setters: [function (_aureliaBinding) {
+      bindingMode = _aureliaBinding.bindingMode;
+    }, function (_aureliaDependencyInjection) {
       inject = _aureliaDependencyInjection.inject;
     }, function (_aureliaEventAggregator) {
       EventAggregator = _aureliaEventAggregator.EventAggregator;
     }, function (_aureliaTemplating) {
+      bindable = _aureliaTemplating.bindable;
       customElement = _aureliaTemplating.customElement;
     }, function (_aureliaPluginsGooglePlacesAutocompleteConfig) {
       Config = _aureliaPluginsGooglePlacesAutocompleteConfig.Config;
     }],
     execute: function () {
-      _export('GoogleAutocomplete', GoogleAutocomplete = (_dec = customElement('aup-google-places-autocomplete'), _dec2 = inject(Element, Config, EventAggregator), _dec(_class = _dec2(_class = function () {
+      _export('GoogleAutocomplete', GoogleAutocomplete = (_dec = customElement('aup-google-places-autocomplete'), _dec2 = inject(Element, Config, EventAggregator), _dec3 = bindable({ defaultBindingMode: bindingMode.twoWay }), _dec(_class = _dec2(_class = (_class2 = function () {
         function GoogleAutocomplete(element, config, eventAggregator) {
           var _this = this;
 
           
 
           this._scriptPromise = null;
+
+          _initDefineProp(this, 'value', _descriptor, this);
+
           this.disabled = true;
 
           this._config = config;
@@ -69,7 +118,6 @@ System.register(['aurelia-dependency-injection', 'aurelia-event-aggregator', 'au
           if (this._config.get('loadApiScript')) {
             this._loadApiScript();return this._initialize();
           }
-
           this._eventAggregator.subscribe(this._config.get('apiScriptLoadedEvent'), function (scriptPromise) {
             _this._scriptPromise = scriptPromise;
             _this._initialize();
@@ -121,7 +169,7 @@ System.register(['aurelia-dependency-injection', 'aurelia-event-aggregator', 'au
             var script = document.createElement('script');
             script.async = true;
             script.defer = true;
-            script.src = 'https://maps.googleapis.com/maps/api/js?key=' + this._config.get('key') + '&libraries=' + this._config.get('libraries') + '&language=' + this._config.get('language') + '&callback=aureliaPluginsGooglePlacesAutocompleteCallback';
+            script.src = 'https://maps.googleapis.com/maps/api/js?callback=aureliaPluginsGooglePlacesAutocompleteCallback&key=' + this._config.get('key') + '&language=' + this._config.get('language') + '&libraries=' + this._config.get('libraries');
             script.type = 'text/javascript';
             document.body.appendChild(script);
 
@@ -148,7 +196,10 @@ System.register(['aurelia-dependency-injection', 'aurelia-event-aggregator', 'au
         };
 
         return GoogleAutocomplete;
-      }()) || _class) || _class));
+      }(), (_descriptor = _applyDecoratedDescriptor(_class2.prototype, 'value', [_dec3], {
+        enumerable: true,
+        initializer: null
+      })), _class2)) || _class) || _class));
 
       _export('GoogleAutocomplete', GoogleAutocomplete);
     }

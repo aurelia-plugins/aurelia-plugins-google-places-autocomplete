@@ -113,3 +113,28 @@ export class App {
   }
 }
 ```
+
+### Get the input value
+
+If you place the Google Places Autocomplete in a form that will be submitted, no `Place` object will be returned. Bind the property `value` to `<aup-google-places-autocomplete></aup-google-places-autocomplete>` to get the value of the input. Use the Google Geocoder to convert the address into geographic coordinates.
+
+```html
+<form submit.delegate="onSubmit()">
+  <aup-google-places-autocomplete bind.value="value"></aup-google-places-autocomplete>
+  <button type="submit">Submit</button>
+</form>
+```
+
+```javascript
+export class App {
+  value = null;
+  
+  onSubmit() {
+    var geocoder = window.google.maps.Geocoder;
+    geocoder.geocode({ address: this.value }, (results, status) => {
+      if (status !== window.google.maps.GeocoderStatus.OK) return;
+      console.log(results[0].geometry.location);
+    });
+  }
+}
+```

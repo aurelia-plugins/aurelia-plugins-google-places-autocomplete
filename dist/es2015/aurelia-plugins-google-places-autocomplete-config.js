@@ -1,7 +1,14 @@
 
 export let Config = class Config {
   constructor() {
-    this._config = { apiScriptLoadedEvent: 'aurelia-plugins:google-maps:api-script-loaded', key: '', language: 'en', libraries: 'places', loadApiScript: true, options: { types: ['geocode'] } };
+    this._config = {
+      apiScriptLoadedEvent: 'aurelia-plugins:google-maps:api-script-loaded',
+      key: '',
+      language: 'en',
+      libraries: 'places',
+      loadApiScript: true,
+      options: { types: ['geocode'] }
+    };
   }
 
   get(key) {
