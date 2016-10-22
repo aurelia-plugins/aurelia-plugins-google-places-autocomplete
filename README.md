@@ -94,26 +94,6 @@ export class App {
 }
 ````
 
-### Clear the place
-
-To clear the input on the Google Places Autocomplete, publish the event `aurelia-plugins:google-places-autocomplete:clear`.
-
-```javascript
-import {EventAggregator} from 'aurelia-event-aggregator';
-import {inject} from 'aurelia-framework';
-
-@inject(EventAggregator)
-export class App {
-  constructor(eventAggregator) {
-    this.eventAggregator = eventAggregator;
-  }
-
-  onClick() {
-    this.eventAggregator.publish('aurelia-plugins:google-places-autocomplete:clear');
-  }
-}
-```
-
 ### Get the input value
 
 If you place the Google Places Autocomplete in a form that will be submitted, no `Place` object will be returned. Bind the property `value` to `<aup-google-places-autocomplete></aup-google-places-autocomplete>` to get the value of the input. Use the Google Geocoder to convert the address into geographic coordinates.

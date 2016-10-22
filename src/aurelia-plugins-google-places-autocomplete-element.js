@@ -34,8 +34,6 @@ export class GoogleAutocomplete {
 
     if (!this._config.get('key')) return console.error('No Google API key has been specified.');
 
-    this._eventAggregator.subscribe('aurelia-plugins:google-places-autocomplete:clear', () => { this.input.value = ''; });
-
     if (this._config.get('loadApiScript')) { this._loadApiScript(); return this._initialize(); }
     this._eventAggregator.subscribe(this._config.get('apiScriptLoadedEvent'), scriptPromise => {
       this._scriptPromise = scriptPromise;
