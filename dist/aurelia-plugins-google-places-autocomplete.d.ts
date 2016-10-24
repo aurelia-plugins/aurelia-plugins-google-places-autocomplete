@@ -58,7 +58,7 @@ export declare class GooglePlacesAutocomplete {
   blur(): any;
   focus(): any;
   keydown(event?: any): any;
-  select(prediction?: any): any;
+  select(prediction?: any, submit?: any): any;
 }
 
 // IMPORTS

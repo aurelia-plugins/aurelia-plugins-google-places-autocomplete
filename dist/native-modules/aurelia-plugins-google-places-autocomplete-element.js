@@ -159,11 +159,16 @@ export var GooglePlacesAutocomplete = (_dec = customElement('aup-google-places-a
   };
 
   GooglePlacesAutocomplete.prototype.keydown = function keydown(event) {
+    var _this3 = this;
+
     if (this.selected) this.selected = false;
     if (!this.show) return true;
     switch (event.keyCode) {
       case 13:
-        this.index != -1 ? this.select(this.predictions[this.index]) : this.show = false;
+        this.index !== -1 ? this.select(this.predictions[this.index], false) : this.show = false;
+        setTimeout(function () {
+          _this3._element.firstElementChild.blur();
+        }, 100);
         break;
       case 27:
         this.show = false;break;
@@ -180,8 +185,15 @@ export var GooglePlacesAutocomplete = (_dec = customElement('aup-google-places-a
   };
 
   GooglePlacesAutocomplete.prototype.select = function select(prediction) {
+    var _this4 = this;
+
+    var submit = arguments.length <= 1 || arguments[1] === undefined ? true : arguments[1];
+
     this.value = prediction.description;
     this.selected = true;
+    if (submit) setTimeout(function () {
+      _this4._dispatchEvent();
+    }, 100);
     this._clear(true);
   };
 
@@ -192,6 +204,17 @@ export var GooglePlacesAutocomplete = (_dec = customElement('aup-google-places-a
     if (!keep) this.predictions = [];
     this.index = -1;
     this.show = show;
+  };
+
+  GooglePlacesAutocomplete.prototype._dispatchEvent = function _dispatchEvent() {
+    if (!this._element.firstElementChild.form.attributes['submit.delegate']) return;
+    var clickEvent;
+    if (window.CustomEvent) clickEvent = new CustomEvent('submit', { bubbles: true, details: event });else {
+      clickEvent = document.createEvent('CustomEvent');
+      clickEvent.initCustomEvent('submit', true, true, { data: event });
+    }
+    this._element.firstElementChild.form.dispatchEvent(clickEvent);
+    this._element.firstElementChild.blur();
   };
 
   GooglePlacesAutocomplete.prototype._initialize = function () {
@@ -224,7 +247,7 @@ export var GooglePlacesAutocomplete = (_dec = customElement('aup-google-places-a
   }();
 
   GooglePlacesAutocomplete.prototype._loadApiScript = function _loadApiScript() {
-    var _this3 = this;
+    var _this5 = this;
 
     if (this._scriptPromise) return;
     if (window.google === undefined || window.google.maps === undefined) {
@@ -236,7 +259,7 @@ export var GooglePlacesAutocomplete = (_dec = customElement('aup-google-places-a
       document.body.appendChild(script);
       this._scriptPromise = new Promise(function (resolve, reject) {
         window.aureliaPluginsGooglePlacesAutocompleteCallback = function () {
-          _this3._eventAggregator.publish('aurelia-plugins:google-places-autocomplete:api-script-loaded', _this3._scriptPromise);
+          _this5._eventAggregator.publish('aurelia-plugins:google-places-autocomplete:api-script-loaded', _this5._scriptPromise);
           resolve();
         };
         script.onerror = function (error) {
