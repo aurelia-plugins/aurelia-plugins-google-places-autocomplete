@@ -13,6 +13,13 @@ import {
 } from 'aurelia-templating';
 
 // PUBLIC CLASS
+export declare class HighlightValueConverter {
+  
+  // INTERFACE METHODS
+  toView(array?: any): any;
+}
+
+// PUBLIC CLASS
 export declare class Config {
   
   // CONSTRUCTOR
@@ -28,14 +35,30 @@ export declare class Config {
 
 // IMPORTS
 // CLASS ATTRIBUTES
-export declare class GoogleAutocomplete {
+export declare class GooglePlacesAutocomplete {
+  itemClass: any;
+  itemHoverClass: any;
+  placeholder: any;
   value: any;
   
   // PUBLIC PROPERTIES
   disabled: any;
+  index: any;
+  predictions: any;
+  selected: any;
+  show: any;
   
   // CONSTRUCTOR
   constructor(element?: any, config?: any, eventAggregator?: any);
+  
+  // BINDABLE METHODS
+  valueChanged(newValue?: any): any;
+  
+  // PUBLIC METHODS
+  blur(): any;
+  focus(): any;
+  keydown(event?: any): any;
+  select(prediction?: any): any;
 }
 
 // IMPORTS

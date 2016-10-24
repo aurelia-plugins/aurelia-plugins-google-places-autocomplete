@@ -8,6 +8,6 @@ define(['exports', './aurelia-plugins-google-places-autocomplete-config'], funct
   function configure(aurelia, configCallback) {
     var instance = aurelia.container.get(_aureliaPluginsGooglePlacesAutocompleteConfig.Config);
     if (configCallback !== undefined && typeof configCallback === 'function') configCallback(instance);
-    aurelia.globalResources('./aurelia-plugins-google-places-autocomplete-element');
+    aurelia.globalResources('./aurelia-plugins-google-places-autocomplete-converter', './aurelia-plugins-google-places-autocomplete-element');
   }
 });

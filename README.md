@@ -2,6 +2,8 @@
 
 A Google Places Autocomplete plugin for Aurelia.
 
+This plugin is a custom element build with the Google Places AutocompleteService instead of the Google Places Autocomplete class. You can use this plugin easily in a form and don't have to deal with the asynchronous `placed_changed` event. Simply bind a `value` to the element to get the value of the input in your form. The downside is that you still need to do your own geocoding if you want to have geographic coordinates of the address.
+
 ## Installation
 
 **Webpack/Aurelia CLI**
@@ -70,33 +72,9 @@ Once Google Places Autocomplete is configured, to use it simply add the custom e
 The `aurelia-plugins:google-places-autocomplete:api-script-loaded` event is published when the Google API Script is completely loaded.
 
 
-### Get the place
-
-To get the place information, subscribe to the event `aurelia-plugins:google-places-autocomplete:place-changed` in your viewmodel. The complete [`PlaceResult`](<https://developers.google.com/maps/documentation/javascript/places#place_details_results>) object from Google is returned.
-
-```html
-<aup-google-places-autocomplete></aup-google-places-autocomplete>
-```
-
-```javascript
-import {EventAggregator} from 'aurelia-event-aggregator';
-import {inject} from 'aurelia-framework';
-
-@inject(EventAggregator)
-export class App {
-  constructor(eventAggregator) {
-    this.eventAggregator = eventAggregator;
-
-    this.eventAggregator.subscribe('aurelia-plugins:google-places-autocomplete:place-changed', place => {
-    	console.log(place);
-    });
-  }
-}
-````
-
 ### Get the input value
 
-If you place the Google Places Autocomplete in a form that will be submitted, no `Place` object will be returned. Bind the property `value` to `<aup-google-places-autocomplete></aup-google-places-autocomplete>` to get the value of the input. Use the Google Geocoder to convert the address into geographic coordinates.
+Bind the `value` attribute to `<aup-google-places-autocomplete></aup-google-places-autocomplete>` to get the value selected from the Google Places AutocompleteService. Do your own geocoding if necessary. You can also easily validate the value with `aurelia-validation`.
 
 ```html
 <form submit.delegate="onSubmit()">
@@ -107,7 +85,7 @@ If you place the Google Places Autocomplete in a form that will be submitted, no
 
 ```javascript
 export class App {
-  value = null;
+  value = '';
   
   async onSubmit() {
     var place = await this.geocode(this.value);
@@ -123,3 +101,11 @@ export class App {
   }
 }
 ```
+
+### Other parameters
+
+The other parameters that can be used on `<aup-google-places-autocomplete></aup-google-places-autocomplete>` are:
+
+* `placeholder`: The placeholder shown on the input.
+* `itemClass`: The CSS class added to the listitem of the autocomplete when it isn't selected.
+* `itemHoverClass`: The CSS class added to the listitem of the autocomplete when it is selected.
