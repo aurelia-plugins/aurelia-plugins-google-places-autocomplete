@@ -14,11 +14,12 @@ import {Config} from './aurelia-plugins-google-places-autocomplete-config';
 
 // PUBLIC CLASS
 export class GooglePlacesAutocomplete {
-  // PRIVATE PROPERTIES
+  // PRIVATE PROPERTIES (DI)
   _config;
   _element;
   _eventAggregator;
 
+  // PRIVATE PROPERTIES (CUSTOM)
   _scriptPromise = null;
   _service = null;
   _servicePromise = null;
