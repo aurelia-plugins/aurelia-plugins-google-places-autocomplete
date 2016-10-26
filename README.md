@@ -2,7 +2,7 @@
 
 A Google Places Autocomplete plugin for Aurelia.
 
-This plugin is a custom element build with the Google Places AutocompleteService instead of the Google Places Autocomplete class. You can use this plugin easily in a form and don't have to deal with the asynchronous `placed_changed` event. Simply bind a `value` to the element to get the value of the input in your form. The downside is that you still need to do your own geocoding if you want to have geographic coordinates of the address.
+This plugin is a custom element build with the **Google Places AutocompleteService** instead of the Google Places Autocomplete class. You can use this plugin easily in a form and don't have to deal with the asynchronous `placed_changed` event. Simply bind a `value` to the element to get the value of the input in your form. The downside is that you still need to do your own geocoding if you want to have geographic coordinates of the address. Luckily, this can be easily done with the Google Geocoder.
 
 ## Installation
 
@@ -49,7 +49,7 @@ export async function configure(aurelia) {
   aurelia.use
     .plugin('aurelia-plugins-google-places-autocomplete', config => {
       config.options({
-        apiScriptLoadedEvent: 'aurelia-plugins:google-maps:api-script-loaded', // if loadApiScript is false, the event that is published to know when the Google Maps API is completely loaded
+        apiScriptLoadedEvent: 'aurelia-plugins:google-maps:api-script-loaded', // if loadApiScript is false, the event that is subscribed to to know when the Google Maps API is loaded by another plugin
         key: '', // your Google API key retrieved from the Google Developer Console
         language: 'nl', // see https://developers.google.com/maps/documentation/javascript/localization
         libraries: 'places', // see https://developers.google.com/maps/documentation/javascript/libraries
@@ -67,9 +67,9 @@ export async function configure(aurelia) {
 
 Once Google Places Autocomplete is configured, to use it simply add the custom element `<aup-google-places-autocomplete></aup-google-places-autocomplete>` in your view.
 
-### Google API loaded
+### Google Maps API loaded
 
-The `aurelia-plugins:google-places-autocomplete:api-script-loaded` event is published when the Google API Script is completely loaded.
+The `aurelia-plugins:google-places-autocomplete:api-script-loaded` event is published when the Google Maps API Script is completely loaded. A Promise is returned as payload. This event is used together with other Aurelia Plugins in combination with the option `loadApiScript=false` to make sure the Google Maps API Script is loaded only once.
 
 
 ### Get the input value
@@ -102,10 +102,9 @@ export class App {
 }
 ```
 
-### Other parameters
+### Other attributes
 
-The other parameters that can be used on `<aup-google-places-autocomplete></aup-google-places-autocomplete>` are:
+The other attributes that can be used on `<aup-google-places-autocomplete></aup-google-places-autocomplete>` are:
 
 * `placeholder`: The placeholder shown on the input.
-* `itemClass`: The CSS class added to the listitem of the autocomplete when it isn't selected.
-* `itemHoverClass`: The CSS class added to the listitem of the autocomplete when it is selected.
+* `selectClass`: The CSS class added to the selected item in the autocomplete when using up and down keys.

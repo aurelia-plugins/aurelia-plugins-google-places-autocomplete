@@ -5,7 +5,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.GooglePlacesAutocomplete = undefined;
 
-var _dec, _dec2, _dec3, _class, _desc, _value, _class2, _descriptor, _descriptor2, _descriptor3, _descriptor4;
+var _dec, _dec2, _dec3, _class, _desc, _value, _class2, _descriptor, _descriptor2, _descriptor3;
 
 var _aureliaBinding = require('aurelia-binding');
 
@@ -75,13 +75,11 @@ var GooglePlacesAutocomplete = exports.GooglePlacesAutocomplete = (_dec = (0, _a
     this._servicePromise = null;
     this._serviceResolve = null;
 
-    _initDefineProp(this, 'itemClass', _descriptor, this);
+    _initDefineProp(this, 'placeholder', _descriptor, this);
 
-    _initDefineProp(this, 'itemHoverClass', _descriptor2, this);
+    _initDefineProp(this, 'selectClass', _descriptor2, this);
 
-    _initDefineProp(this, 'placeholder', _descriptor3, this);
-
-    _initDefineProp(this, 'value', _descriptor4, this);
+    _initDefineProp(this, 'value', _descriptor3, this);
 
     this.disabled = true;
     this.index = -1;
@@ -92,13 +90,10 @@ var GooglePlacesAutocomplete = exports.GooglePlacesAutocomplete = (_dec = (0, _a
     this._config = config;
     this._element = element;
     this._eventAggregator = eventAggregator;
-
     if (!this._config.get('key')) return console.error('No Google API key has been specified.');
-
     this._servicePromise = new Promise(function (resolve) {
       _this._serviceResolve = resolve;
     });
-
     if (this._config.get('loadApiScript')) {
       this._loadApiScript();return this._initialize();
     }
@@ -276,30 +271,23 @@ var GooglePlacesAutocomplete = exports.GooglePlacesAutocomplete = (_dec = (0, _a
           reject(error);
         };
       });
-    } else if (window.google && window.google.maps) {
-      this._scriptPromise = new Promise(function (resolve) {
-        resolve();
-      });
-    }
+    } else if (window.google && window.google.maps) this._scriptPromise = new Promise(function (resolve) {
+      resolve();
+    });
   };
 
   return GooglePlacesAutocomplete;
-}(), (_descriptor = _applyDecoratedDescriptor(_class2.prototype, 'itemClass', [_aureliaTemplating.bindable], {
-  enumerable: true,
-  initializer: function initializer() {
-    return 'font-small p-x-8 p-y-2';
-  }
-}), _descriptor2 = _applyDecoratedDescriptor(_class2.prototype, 'itemHoverClass', [_aureliaTemplating.bindable], {
-  enumerable: true,
-  initializer: function initializer() {
-    return 'bg-clouds font-small p-x-8 p-y-2';
-  }
-}), _descriptor3 = _applyDecoratedDescriptor(_class2.prototype, 'placeholder', [_aureliaTemplating.bindable], {
+}(), (_descriptor = _applyDecoratedDescriptor(_class2.prototype, 'placeholder', [_aureliaTemplating.bindable], {
   enumerable: true,
   initializer: function initializer() {
     return 'Enter a location';
   }
-}), _descriptor4 = _applyDecoratedDescriptor(_class2.prototype, 'value', [_dec3], {
+}), _descriptor2 = _applyDecoratedDescriptor(_class2.prototype, 'selectClass', [_aureliaTemplating.bindable], {
+  enumerable: true,
+  initializer: function initializer() {
+    return 'bg-clouds';
+  }
+}), _descriptor3 = _applyDecoratedDescriptor(_class2.prototype, 'value', [_dec3], {
   enumerable: true,
   initializer: null
 })), _class2)) || _class) || _class);

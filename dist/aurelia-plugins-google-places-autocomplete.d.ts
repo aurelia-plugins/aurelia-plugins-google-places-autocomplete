@@ -36,9 +36,8 @@ export declare class Config {
 // IMPORTS
 // CLASS ATTRIBUTES
 export declare class GooglePlacesAutocomplete {
-  itemClass: any;
-  itemHoverClass: any;
   placeholder: any;
+  selectClass: any;
   value: any;
   
   // PUBLIC PROPERTIES
