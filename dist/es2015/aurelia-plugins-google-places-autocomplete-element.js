@@ -1,6 +1,6 @@
 var _dec, _dec2, _dec3, _class, _desc, _value, _class2, _descriptor, _descriptor2, _descriptor3;
 
-function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { return step("next", value); }, function (err) { return step("throw", err); }); } } return step("next"); }); }; }
+function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
 
 function _initDefineProp(target, property, descriptor, context) {
   if (!descriptor) return;
@@ -79,7 +79,7 @@ export let GooglePlacesAutocomplete = (_dec = customElement('aup-google-places-a
       this._serviceResolve = resolve;
     });
     if (this._config.get('loadApiScript')) {
-      this._loadApiScript();return this._initialize();
+      this._loadApiScript();this._initialize();return;
     }
     this._eventAggregator.subscribe(this._config.get('apiScriptLoadedEvent'), scriptPromise => {
       this._scriptPromise = scriptPromise;

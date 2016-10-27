@@ -23,9 +23,9 @@ define(['exports', 'aurelia-binding', 'aurelia-dependency-injection', 'aurelia-e
             resolve(value);
           } else {
             return Promise.resolve(value).then(function (value) {
-              return step("next", value);
+              step("next", value);
             }, function (err) {
-              return step("throw", err);
+              step("throw", err);
             });
           }
         }
@@ -113,7 +113,7 @@ define(['exports', 'aurelia-binding', 'aurelia-dependency-injection', 'aurelia-e
         _this._serviceResolve = resolve;
       });
       if (this._config.get('loadApiScript')) {
-        this._loadApiScript();return this._initialize();
+        this._loadApiScript();this._initialize();return;
       }
       this._eventAggregator.subscribe(this._config.get('apiScriptLoadedEvent'), function (scriptPromise) {
         _this._scriptPromise = scriptPromise;
@@ -210,7 +210,7 @@ define(['exports', 'aurelia-binding', 'aurelia-dependency-injection', 'aurelia-e
     GooglePlacesAutocomplete.prototype.select = function select(prediction) {
       var _this4 = this;
 
-      var submit = arguments.length <= 1 || arguments[1] === undefined ? true : arguments[1];
+      var submit = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
 
       this.value = prediction.description;
       this.selected = true;
@@ -221,8 +221,8 @@ define(['exports', 'aurelia-binding', 'aurelia-dependency-injection', 'aurelia-e
     };
 
     GooglePlacesAutocomplete.prototype._clear = function _clear() {
-      var keep = arguments.length <= 0 || arguments[0] === undefined ? false : arguments[0];
-      var show = arguments.length <= 1 || arguments[1] === undefined ? false : arguments[1];
+      var keep = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+      var show = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
 
       if (!keep) this.predictions = [];
       this.index = -1;

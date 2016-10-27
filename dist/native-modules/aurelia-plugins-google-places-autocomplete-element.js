@@ -1,6 +1,6 @@
 var _dec, _dec2, _dec3, _class, _desc, _value, _class2, _descriptor, _descriptor2, _descriptor3;
 
-function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { return step("next", value); }, function (err) { return step("throw", err); }); } } return step("next"); }); }; }
+function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
 
 function _initDefineProp(target, property, descriptor, context) {
   if (!descriptor) return;
@@ -85,7 +85,7 @@ export var GooglePlacesAutocomplete = (_dec = customElement('aup-google-places-a
       _this._serviceResolve = resolve;
     });
     if (this._config.get('loadApiScript')) {
-      this._loadApiScript();return this._initialize();
+      this._loadApiScript();this._initialize();return;
     }
     this._eventAggregator.subscribe(this._config.get('apiScriptLoadedEvent'), function (scriptPromise) {
       _this._scriptPromise = scriptPromise;
@@ -182,7 +182,7 @@ export var GooglePlacesAutocomplete = (_dec = customElement('aup-google-places-a
   GooglePlacesAutocomplete.prototype.select = function select(prediction) {
     var _this4 = this;
 
-    var submit = arguments.length <= 1 || arguments[1] === undefined ? true : arguments[1];
+    var submit = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
 
     this.value = prediction.description;
     this.selected = true;
@@ -193,8 +193,8 @@ export var GooglePlacesAutocomplete = (_dec = customElement('aup-google-places-a
   };
 
   GooglePlacesAutocomplete.prototype._clear = function _clear() {
-    var keep = arguments.length <= 0 || arguments[0] === undefined ? false : arguments[0];
-    var show = arguments.length <= 1 || arguments[1] === undefined ? false : arguments[1];
+    var keep = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+    var show = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
 
     if (!keep) this.predictions = [];
     this.index = -1;

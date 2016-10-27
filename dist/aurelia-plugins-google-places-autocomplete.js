@@ -60,11 +60,12 @@ export class Config {
 
 // PUBLIC CLASS
 export class GooglePlacesAutocomplete {
-  // PRIVATE PROPERTIES
+  // PRIVATE PROPERTIES (DI)
   _config;
   _element;
   _eventAggregator;
 
+  // PRIVATE PROPERTIES (CUSTOM)
   _scriptPromise = null;
   _service = null;
   _servicePromise = null;
@@ -89,7 +90,7 @@ export class GooglePlacesAutocomplete {
     this._eventAggregator = eventAggregator;
     if (!this._config.get('key')) return console.error('No Google API key has been specified.');
     this._servicePromise = new Promise(resolve => { this._serviceResolve = resolve; });
-    if (this._config.get('loadApiScript')) { this._loadApiScript(); return this._initialize(); }
+    if (this._config.get('loadApiScript')) { this._loadApiScript(); this._initialize(); return; }
     this._eventAggregator.subscribe(this._config.get('apiScriptLoadedEvent'), scriptPromise => {
       this._scriptPromise = scriptPromise;
       this._initialize();
