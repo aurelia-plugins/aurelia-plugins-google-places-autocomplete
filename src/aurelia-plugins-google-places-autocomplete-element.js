@@ -45,10 +45,7 @@ export class GooglePlacesAutocomplete {
     if (!this._config.get('key')) return console.error('No Google API key has been specified.');
     this._servicePromise = new Promise(resolve => { this._serviceResolve = resolve; });
     if (this._config.get('loadApiScript')) { this._loadApiScript(); this._initialize(); return; }
-    this._eventAggregator.subscribe(this._config.get('apiScriptLoadedEvent'), scriptPromise => {
-      this._scriptPromise = scriptPromise;
-      this._initialize();
-    });
+    this._eventAggregator.subscribe(this._config.get('apiScriptLoadedEvent'), scriptPromise => { this._scriptPromise = scriptPromise; this._initialize(); });
   }
 
   // BINDABLE METHODS
