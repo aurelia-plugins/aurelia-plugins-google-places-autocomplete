@@ -82,8 +82,7 @@ export let GooglePlacesAutocomplete = (_dec = customElement('aup-google-places-a
       this._loadApiScript();this._initialize();return;
     }
     this._eventAggregator.subscribe(this._config.get('apiScriptLoadedEvent'), scriptPromise => {
-      this._scriptPromise = scriptPromise;
-      this._initialize();
+      this._scriptPromise = scriptPromise;this._initialize();
     });
   }
 
@@ -153,7 +152,7 @@ export let GooglePlacesAutocomplete = (_dec = customElement('aup-google-places-a
   _dispatchEvent() {
     if (!this._element.firstElementChild.form.attributes['submit.delegate']) return;
     var clickEvent;
-    if (window.CustomEvent) clickEvent = new CustomEvent('submit', { bubbles: true, details: event });else {
+    if (window.CustomEvent) clickEvent = new CustomEvent('submit', { bubbles: true, detail: event });else {
       clickEvent = document.createEvent('CustomEvent');
       clickEvent.initCustomEvent('submit', true, true, { data: event });
     }

@@ -149,8 +149,7 @@ var GooglePlacesAutocomplete = exports.GooglePlacesAutocomplete = (_dec = (0, _a
       this._loadApiScript();this._initialize();return;
     }
     this._eventAggregator.subscribe(this._config.get('apiScriptLoadedEvent'), function (scriptPromise) {
-      _this._scriptPromise = scriptPromise;
-      _this._initialize();
+      _this._scriptPromise = scriptPromise;_this._initialize();
     });
   }
 
@@ -265,7 +264,7 @@ var GooglePlacesAutocomplete = exports.GooglePlacesAutocomplete = (_dec = (0, _a
   GooglePlacesAutocomplete.prototype._dispatchEvent = function _dispatchEvent() {
     if (!this._element.firstElementChild.form.attributes['submit.delegate']) return;
     var clickEvent;
-    if (window.CustomEvent) clickEvent = new CustomEvent('submit', { bubbles: true, details: event });else {
+    if (window.CustomEvent) clickEvent = new CustomEvent('submit', { bubbles: true, detail: event });else {
       clickEvent = document.createEvent('CustomEvent');
       clickEvent.initCustomEvent('submit', true, true, { data: event });
     }

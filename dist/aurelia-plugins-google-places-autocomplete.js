@@ -91,10 +91,7 @@ export class GooglePlacesAutocomplete {
     if (!this._config.get('key')) return console.error('No Google API key has been specified.');
     this._servicePromise = new Promise(resolve => { this._serviceResolve = resolve; });
     if (this._config.get('loadApiScript')) { this._loadApiScript(); this._initialize(); return; }
-    this._eventAggregator.subscribe(this._config.get('apiScriptLoadedEvent'), scriptPromise => {
-      this._scriptPromise = scriptPromise;
-      this._initialize();
-    });
+    this._eventAggregator.subscribe(this._config.get('apiScriptLoadedEvent'), scriptPromise => { this._scriptPromise = scriptPromise; this._initialize(); });
   }
 
   // BINDABLE METHODS
@@ -158,7 +155,7 @@ export class GooglePlacesAutocomplete {
     if (!this._element.firstElementChild.form.attributes['submit.delegate']) return;
     var clickEvent;
     if (window.CustomEvent)
-      clickEvent = new CustomEvent('submit', { bubbles: true, details: event });
+      clickEvent = new CustomEvent('submit', { bubbles: true, detail: event });
     else {
       clickEvent = document.createEvent('CustomEvent');
       clickEvent.initCustomEvent('submit', true, true, { data: event });

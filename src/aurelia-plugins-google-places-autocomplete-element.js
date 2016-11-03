@@ -109,7 +109,7 @@ export class GooglePlacesAutocomplete {
     if (!this._element.firstElementChild.form.attributes['submit.delegate']) return;
     var clickEvent;
     if (window.CustomEvent)
-      clickEvent = new CustomEvent('submit', { bubbles: true, details: event });
+      clickEvent = new CustomEvent('submit', { bubbles: true, detail: event });
     else {
       clickEvent = document.createEvent('CustomEvent');
       clickEvent.initCustomEvent('submit', true, true, { data: event });
