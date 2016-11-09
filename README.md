@@ -71,6 +71,8 @@ Once Google Places Autocomplete is configured, to use it simply add the custom e
 
 The `aurelia-plugins:google-places-autocomplete:api-script-loaded` event is published when the Google Maps API Script is completely loaded. A Promise is returned as payload. This event is used together with other Aurelia Plugins in combination with the option `loadApiScript=false` to make sure the Google Maps API Script is loaded only once.
 
+Google Places Autocomplete needs at least the library `places`. Perhaps the other Aurelia Plugin that loads the Google Maps API Script doesn't include the library `places` by default. If so, add it to the `libraries` option of the other Aurelia Plugin.
+
 
 ### Get the input value
 
