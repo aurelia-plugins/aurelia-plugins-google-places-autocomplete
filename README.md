@@ -80,7 +80,7 @@ Bind the `value` attribute to `<aup-google-places-autocomplete></aup-google-plac
 
 ```html
 <form submit.delegate="onSubmit()">
-  <aup-google-places-autocomplete bind.value="value"></aup-google-places-autocomplete>
+  <aup-google-places-autocomplete value.bind="value"></aup-google-places-autocomplete>
   <button type="submit">Submit</button>
 </form>
 ```
