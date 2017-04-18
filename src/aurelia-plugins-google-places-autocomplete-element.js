@@ -15,15 +15,15 @@ import {Config} from './aurelia-plugins-google-places-autocomplete-config';
 // PUBLIC CLASS
 export class GooglePlacesAutocomplete {
   // PRIVATE PROPERTIES (DI)
-  _config;
-  _element;
-  _eventAggregator;
+  config;
+  element;
+  eventAggregator;
 
   // PRIVATE PROPERTIES (CUSTOM)
-  _scriptPromise = null;
-  _service = null;
-  _servicePromise = null;
-  _serviceResolve = null;
+  scriptPromise = null;
+  service = null;
+  servicePromise = null;
+  serviceResolve = null;
 
   // BINDABLE PROPERTIES
   @bindable placeholder = 'Enter a location';
@@ -39,23 +39,23 @@ export class GooglePlacesAutocomplete {
 
   // CONSTRUCTOR
   constructor(element, config, eventAggregator) {
-    this._config = config;
-    this._element = element;
-    this._eventAggregator = eventAggregator;
-    if (!this._config.get('key')) return console.error('No Google API key has been specified.');
-    this._servicePromise = new Promise(resolve => { this._serviceResolve = resolve; });
-    if (this._config.get('loadApiScript')) { this._loadApiScript(); this._initialize(); return; }
-    this._eventAggregator.subscribe(this._config.get('apiScriptLoadedEvent'), scriptPromise => { this._scriptPromise = scriptPromise; this._initialize(); });
+    this.config = config;
+    this.element = element;
+    this.eventAggregator = eventAggregator;
+    if (!this.config.get('key')) return console.error('No Google API key has been specified.');
+    this.servicePromise = new Promise(resolve => { this.serviceResolve = resolve; });
+    if (this.config.get('loadApiScript')) { this.loadApiScript(); this.initialize(); return; }
+    this.eventAggregator.subscribe(this.config.get('apiScriptLoadedEvent'), scriptPromise => { this.scriptPromise = scriptPromise; this.initialize(); });
   }
 
   // BINDABLE METHODS
   async valueChanged(newValue) {
-    await this._servicePromise;
-    if (!newValue) return this._clear();
-    if (this.selected) return this._clear(true);
-    var request = Object.assign({ input: newValue }, this._config.get('options'));
-    this._service.getPlacePredictions(request, (predictions, status) => {
-      if (status !== window.google.maps.places.PlacesServiceStatus.OK) return this._clear();
+    await this.servicePromise;
+    if (!newValue) return this.clear();
+    if (this.selected) return this.clear(true);
+    const request = Object.assign({ input: newValue }, this.config.get('options'));
+    this.service.getPlacePredictions(request, (predictions, status) => {
+      if (status !== window.google.maps.places.PlacesServiceStatus.OK) return this.clear();
       this.predictions = predictions;
       this.show = true;
     });
@@ -63,11 +63,11 @@ export class GooglePlacesAutocomplete {
 
   // PUBLIC METHODS
   blur() {
-    this._clear(true);
+    this.clear(true);
   }
 
   focus() {
-    this._clear(true, true);
+    this.clear(true, true);
   }
 
   keydown(event) {
@@ -76,7 +76,7 @@ export class GooglePlacesAutocomplete {
     switch (event.keyCode) {
       case 13:
         this.index !== -1 ? this.select(this.predictions[this.index], false) : this.show = false;
-        setTimeout(() => { this._element.firstElementChild.blur(); }, 100);
+        setTimeout(() => this.element.firstElementChild.blur(), 100);
         break;
       case 27: this.show = false; break;
       case 38:
@@ -94,55 +94,55 @@ export class GooglePlacesAutocomplete {
   select(prediction, submit = true) {
     this.value = prediction.description;
     this.selected = true;
-    if (submit) setTimeout(() => { this._dispatchEvent(); }, 100);
-    this._clear(true);
+    if (submit) setTimeout(() => this.dispatchEvent(), 100);
+    this.clear(true);
   }
 
   // PRIVATE METHODS
-  _clear(keep = false, show = false) {
+  clear(keep = false, show = false) {
     if (!keep) this.predictions = [];
     this.index = -1;
     this.show = show;
   }
 
-  _dispatchEvent() {
-    if (!this._element.firstElementChild.form.attributes['submit.delegate']) return;
-    var clickEvent;
+  dispatchEvent() {
+    if (!this.element.firstElementChild.form.attributes['submit.delegate']) return;
+    let clickEvent;
     if (window.CustomEvent)
       clickEvent = new CustomEvent('submit', { bubbles: true, detail: event });
     else {
       clickEvent = document.createEvent('CustomEvent');
       clickEvent.initCustomEvent('submit', true, true, { data: event });
     }
-    this._element.firstElementChild.form.dispatchEvent(clickEvent);
-    this._element.firstElementChild.blur();
+    this.element.firstElementChild.form.dispatchEvent(clickEvent);
+    this.element.firstElementChild.blur();
   }
 
-  async _initialize() {
-    await this._scriptPromise;
-    this._service = new window.google.maps.places.AutocompleteService();
-    this._serviceResolve();
+  async initialize() {
+    await this.scriptPromise;
+    this.service = new window.google.maps.places.AutocompleteService();
+    this.serviceResolve();
     this.disabled = false;
   }
 
-  _loadApiScript() {
-    if (this._scriptPromise) return;
+  loadApiScript() {
+    if (this.scriptPromise) return;
     if (window.google === undefined || window.google.maps === undefined) {
-      var script = document.createElement('script');
+      const script = document.createElement('script');
       script.async = true;
       script.defer = true;
-      script.src = `https://maps.googleapis.com/maps/api/js?callback=aureliaPluginsGooglePlacesAutocompleteCallback&key=${this._config.get('key')}&language=${this._config.get('language')}&libraries=${this._config.get('libraries')}`;
+      script.src = `https://maps.googleapis.com/maps/api/js?callback=aureliaPluginsGooglePlacesAutocompleteCallback&key=${this.config.get('key')}&language=${this.config.get('language')}&libraries=${this.config.get('libraries')}`;
       script.type = 'text/javascript';
       document.body.appendChild(script);
-      this._scriptPromise = new Promise((resolve, reject) => {
+      this.scriptPromise = new Promise((resolve, reject) => {
         window.aureliaPluginsGooglePlacesAutocompleteCallback = () => {
-          this._eventAggregator.publish('aurelia-plugins:google-places-autocomplete:api-script-loaded', this._scriptPromise);
+          this.eventAggregator.publish('aurelia-plugins:google-places-autocomplete:api-script-loaded', this.scriptPromise);
           resolve();
         };
-        script.onerror = error => { reject(error); };
+        script.onerror = error => reject(error);
       });
     }
     else if (window.google && window.google.maps)
-      this._scriptPromise = new Promise(resolve => { resolve(); });
+      this.scriptPromise = new Promise(resolve => resolve());
   }
 }

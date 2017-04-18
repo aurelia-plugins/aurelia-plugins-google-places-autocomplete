@@ -1,11 +1,11 @@
 // PUBLIC CLASS
 export class Config {
   // PRIVATE PROPERTIES
-  _config;
+  config;
 
   // CONSTRUCTOR
   constructor() {
-    this._config = {
+    this.config = {
       apiScriptLoadedEvent: 'aurelia-plugins:google-maps:api-script-loaded',
       key: '',
       language: 'en',
@@ -17,15 +17,15 @@ export class Config {
 
   // PUBLIC METHODS
   get(key) {
-    return this._config[key];
+    return this.config[key];
   }
 
   options(obj) {
-    Object.assign(this._config, obj);
+    Object.assign(this.config, obj);
   }
 
   set(key, value) {
-    this._config[key] = value;
-    return this._config[key];
+    this.config[key] = value;
+    return this.config[key];
   }
 }

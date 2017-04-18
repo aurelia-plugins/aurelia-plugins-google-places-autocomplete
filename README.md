@@ -49,7 +49,7 @@ export async function configure(aurelia) {
   aurelia.use
     .plugin('aurelia-plugins-google-places-autocomplete', config => {
       config.options({
-        apiScriptLoadedEvent: 'aurelia-plugins:google-maps:api-script-loaded', // if loadApiScript is false, the event that is subscribed to to know when the Google Maps API is loaded by another plugin
+        apiScriptLoadedEvent: 'aurelia-plugins:google-maps:api-script-loaded', // if loadApiScript is false, the event that is subscribed to, to know when the Google Maps API is loaded by another plugin
         key: '', // your Google API key retrieved from the Google Developer Console
         language: 'nl', // see https://developers.google.com/maps/documentation/javascript/localization
         libraries: 'places', // see https://developers.google.com/maps/documentation/javascript/libraries
@@ -73,7 +73,6 @@ The `aurelia-plugins:google-places-autocomplete:api-script-loaded` event is publ
 
 Google Places Autocomplete needs at least the library `places`. Perhaps the other Aurelia Plugin that loads the Google Maps API Script doesn't include the library `places` by default. If so, add it to the `libraries` option of the other Aurelia Plugin.
 
-
 ### Get the input value
 
 Bind the `value` attribute to `<aup-google-places-autocomplete></aup-google-places-autocomplete>` to get the value selected from the Google Places AutocompleteService. Do your own geocoding if necessary. You can also easily validate the value with `aurelia-validation`.
@@ -88,9 +87,11 @@ Bind the `value` attribute to `<aup-google-places-autocomplete></aup-google-plac
 ```javascript
 export class App {
   value = '';
-  
+
+  constructor() {}
+
   async onSubmit() {
-    var place = await this.geocode(this.value);
+    const place = await this.geocode(this.value);
     console.log(place);
   }
   
@@ -110,3 +111,7 @@ The other attributes that can be used on `<aup-google-places-autocomplete></aup-
 
 * `placeholder`: The placeholder shown on the input.
 * `selectClass`: The CSS class added to the selected item in the autocomplete when using up and down keys.
+
+```html
+<aup-google-places-autocomplete placeholder="Enter a location" selectClass="highlight" value.bind="value"></aup-google-places-autocomplete>
+```
