@@ -21,7 +21,7 @@ modules.forEach(module => {
     gulp.src(paths.js)
       .pipe(babel({
         comments: false,
-        plugins: ['transform-class-properties', 'transform-decorators-legacy'],
+        plugins: ['transform-decorators-legacy', 'transform-class-properties'],
         presets: module === 'es2015' ? ['stage-1'] : [['env', {
           include: ['transform-es2015-template-literals'],
           loose: true,

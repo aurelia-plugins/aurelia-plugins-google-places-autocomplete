@@ -1,6 +1,7 @@
-// PUBLIC CLASS
-export class HighlightValueConverter {
-  // INTERFACE METHODS
+'use strict';
+
+exports.__esModule = true;
+let HighlightValueConverter = exports.HighlightValueConverter = class HighlightValueConverter {
   toView(array) {
     array.forEach(item => {
       if (!item.matched_substrings || !item.matched_substrings.length) return;
@@ -13,4 +14,4 @@ export class HighlightValueConverter {
     });
     return array;
   }
-}
+};

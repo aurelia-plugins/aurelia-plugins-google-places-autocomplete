@@ -4,6 +4,8 @@ A Google Places Autocomplete plugin for Aurelia.
 
 This plugin is a custom element build with the **Google Places AutocompleteService** instead of the Google Places Autocomplete class. You can use this plugin easily in a form and don't have to deal with the asynchronous `placed_changed` event. Simply bind a `value` to the element to get the value of the input in your form. The downside is that you still need to do your own geocoding if you want to have geographic coordinates of the address. Luckily, this can be easily done with the Google Geocoder.
 
+Make sure you have the **Google Places API Web Service** activated in the Google API Console.
+
 ## Installation
 
 **Webpack/Aurelia CLI**
@@ -25,18 +27,6 @@ bower install aurelia-plugins-google-places-autocomplete
 ```
 
 ## Configuration
-
-Add to `package.json`
-
-```json
-  "aurelia": {
-    "build": {
-      "resources": [
-        "aurelia-plugins-google-places-autocomplete"
-      ]
-    }
-  }
-```
 
 Inside of your `main.js` or `main.ts` file simply load the plugin inside of the configure method using `.plugin()`.
 

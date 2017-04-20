@@ -1,9 +1,7 @@
-// PUBLIC CLASS
-export class Config {
-  // PRIVATE PROPERTIES
-  _config;
+'use strict';
 
-  // CONSTRUCTOR
+exports.__esModule = true;
+let Config = exports.Config = class Config {
   constructor() {
     this._config = {
       apiScriptLoadedEvent: 'aurelia-plugins:google-maps:api-script-loaded',
@@ -15,7 +13,6 @@ export class Config {
     };
   }
 
-  // PUBLIC METHODS
   get(key) {
     return this._config[key];
   }
@@ -28,4 +25,4 @@ export class Config {
     this._config[key] = value;
     return this._config[key];
   }
-}
+};
