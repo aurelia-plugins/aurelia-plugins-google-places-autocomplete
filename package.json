@@ -1,6 +1,6 @@
 {
   "name": "aurelia-plugins-google-places-autocomplete",
-  "version": "2.0.1",
+  "version": "2.1.0",
   "description": "A Google Places Autocomplete plugin for Aurelia.",
   "keywords": [
     "aurelia",
@@ -28,14 +28,17 @@
     "aurelia-templating": "^1.4.2"
   },
   "devDependencies": {
-    "babel-plugin-transform-class-properties": "^6.24.1",
     "babel-plugin-transform-decorators-legacy": "^1.3.4",
-    "babel-preset-env": "^1.4.0",
+    "babel-preset-es2015": "^6.24.1",
     "babel-preset-stage-1": "^6.24.1",
     "del": "^2.2.2",
     "gulp": "^3.9.1",
     "gulp-babel": "^6.1.2",
     "run-sequence": "^1.2.2"
+  },
+  "scripts": {
+    "build": "gulp",
+    "clean": "rm -rf node_modules && yarn"
   },
   "jspm": {
     "registry": "npm",

@@ -1,11 +1,12 @@
-define(['exports', './aurelia-plugins-google-places-autocomplete-config'], function (exports, _aureliaPluginsGooglePlacesAutocompleteConfig) {
-  'use strict';
+'use strict';
 
-  exports.__esModule = true;
-  exports.configure = configure;
-  function configure(aurelia, configCallback) {
-    const instance = aurelia.container.get(_aureliaPluginsGooglePlacesAutocompleteConfig.Config);
-    if (configCallback !== undefined && typeof configCallback === 'function') configCallback(instance);
-    aurelia.globalResources('./aurelia-plugins-google-places-autocomplete-converter', './aurelia-plugins-google-places-autocomplete-element');
-  }
-});
+exports.__esModule = true;
+exports.configure = configure;
+
+var _aureliaPluginsGooglePlacesAutocompleteConfig = require('./aurelia-plugins-google-places-autocomplete-config');
+
+function configure(aurelia, configCallback) {
+  var instance = aurelia.container.get(_aureliaPluginsGooglePlacesAutocompleteConfig.Config);
+  if (configCallback !== undefined && typeof configCallback === 'function') configCallback(instance);
+  aurelia.globalResources('./aurelia-plugins-google-places-autocomplete-converter', './aurelia-plugins-google-places-autocomplete-element');
+}

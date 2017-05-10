@@ -1,8 +1,13 @@
 'use strict';
 
 exports.__esModule = true;
-let Config = exports.Config = class Config {
-  constructor() {
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var Config = exports.Config = function () {
+  function Config() {
+    _classCallCheck(this, Config);
+
     this._config = {
       apiScriptLoadedEvent: 'aurelia-plugins:google-maps:api-script-loaded',
       key: '',
@@ -13,16 +18,18 @@ let Config = exports.Config = class Config {
     };
   }
 
-  get(key) {
+  Config.prototype.get = function get(key) {
     return this._config[key];
-  }
+  };
 
-  options(obj) {
+  Config.prototype.options = function options(obj) {
     Object.assign(this._config, obj);
-  }
+  };
 
-  set(key, value) {
+  Config.prototype.set = function set(key, value) {
     this._config[key] = value;
     return this._config[key];
-  }
-};
+  };
+
+  return Config;
+}();

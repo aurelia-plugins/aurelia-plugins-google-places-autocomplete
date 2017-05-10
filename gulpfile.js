@@ -11,6 +11,10 @@ const modules = ['amd', 'commonjs', 'es2015', 'system'];
 const paths = { html: 'src/**/*.html', js: 'src/**/*.js', output: 'dist/' };
 
 
+// TASK - DEFAULT
+gulp.task('default', ['build']);
+
+
 // TASK - BUILD
 gulp.task('build', () => run('clean', 'build-html', modules.map(module => `build-babel-${module}`)));
 
@@ -21,13 +25,8 @@ modules.forEach(module => {
     gulp.src(paths.js)
       .pipe(babel({
         comments: false,
-        plugins: ['transform-decorators-legacy', 'transform-class-properties'],
-        presets: module === 'es2015' ? ['stage-1'] : [['env', {
-          include: ['transform-es2015-template-literals'],
-          loose: true,
-          modules: module === 'es2015' ? false : module === 'system' ? 'systemjs' : module,
-          targets: { browsers: ['last 2 versions', 'not ie <= 11'] }
-        }]]
+        plugins: ['transform-decorators-legacy'],
+        presets: module === 'es2015' ? ['stage-1'] : [['es2015', { loose: true }], 'stage-1']
       }))
       .pipe(gulp.dest(`${paths.output}${module}`))
   );

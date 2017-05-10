@@ -27,6 +27,8 @@ function _initDefineProp(target, property, descriptor, context) {
   });
 }
 
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
 function _applyDecoratedDescriptor(target, property, decorators, descriptor, context) {
   var desc = {};
   Object['ke' + 'ys'](descriptor).forEach(function (key) {
@@ -60,8 +62,12 @@ function _initializerWarningHelper(descriptor, context) {
   throw new Error('Decorating class property failed. Please ensure that transform-class-properties is enabled.');
 }
 
-let GooglePlacesAutocomplete = exports.GooglePlacesAutocomplete = (_dec = (0, _aureliaTemplating.customElement)('aup-google-places-autocomplete'), _dec2 = (0, _aureliaDependencyInjection.inject)(Element, _aureliaPluginsGooglePlacesAutocompleteConfig.Config, _aureliaEventAggregator.EventAggregator), _dec3 = (0, _aureliaTemplating.bindable)({ defaultBindingMode: _aureliaBinding.bindingMode.twoWay }), _dec(_class = _dec2(_class = (_class2 = class GooglePlacesAutocomplete {
-  constructor(element, config, eventAggregator) {
+var GooglePlacesAutocomplete = exports.GooglePlacesAutocomplete = (_dec = (0, _aureliaTemplating.customElement)('aup-google-places-autocomplete'), _dec2 = (0, _aureliaDependencyInjection.inject)(Element, _aureliaPluginsGooglePlacesAutocompleteConfig.Config, _aureliaEventAggregator.EventAggregator), _dec3 = (0, _aureliaTemplating.bindable)({ defaultBindingMode: _aureliaBinding.bindingMode.twoWay }), _dec(_class = _dec2(_class = (_class2 = function () {
+  function GooglePlacesAutocomplete(element, config, eventAggregator) {
+    var _this = this;
+
+    _classCallCheck(this, GooglePlacesAutocomplete);
+
     this._initialized = false;
     this._scriptPromise = null;
     this._service = null;
@@ -84,84 +90,96 @@ let GooglePlacesAutocomplete = exports.GooglePlacesAutocomplete = (_dec = (0, _a
     this._element = element;
     this._eventAggregator = eventAggregator;
     if (!this._config.get('key')) return console.error('No Google API key has been specified.');
-    this._servicePromise = new Promise(resolve => {
-      this._serviceResolve = resolve;
+    this._servicePromise = new Promise(function (resolve) {
+      _this._serviceResolve = resolve;
     });
     if (this._config.get('loadApiScript')) {
       this._loadApiScript();this._initialize();return;
     }
-    this._eventAggregator.subscribe(this._config.get('apiScriptLoadedEvent'), scriptPromise => {
-      this._scriptPromise = scriptPromise;this._initialize();
+    this._eventAggregator.subscribe(this._config.get('apiScriptLoadedEvent'), function (scriptPromise) {
+      _this._scriptPromise = scriptPromise;_this._initialize();
     });
   }
 
-  valueChanged(newValue, oldValue) {
-    var _this = this;
+  GooglePlacesAutocomplete.prototype.valueChanged = function () {
+    var _ref = _asyncToGenerator(regeneratorRuntime.mark(function _callee(newValue, oldValue) {
+      var _this2 = this;
 
-    return _asyncToGenerator(regeneratorRuntime.mark(function _callee() {
       var request;
       return regeneratorRuntime.wrap(function _callee$(_context) {
-        while (1) switch (_context.prev = _context.next) {
-          case 0:
-            _context.next = 2;
-            return _this._servicePromise;
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              _context.next = 2;
+              return this._servicePromise;
 
-          case 2:
-            if (_this._initialized) {
-              _context.next = 5;
-              break;
-            }
+            case 2:
+              if (this._initialized) {
+                _context.next = 5;
+                break;
+              }
 
-            _this._initialized = true;return _context.abrupt('return');
+              this._initialized = true;return _context.abrupt('return');
 
-          case 5:
-            if (newValue) {
-              _context.next = 7;
-              break;
-            }
+            case 5:
+              if (newValue) {
+                _context.next = 7;
+                break;
+              }
 
-            return _context.abrupt('return', _this._clear());
+              return _context.abrupt('return', this._clear());
 
-          case 7:
-            if (!_this.selected) {
-              _context.next = 9;
-              break;
-            }
+            case 7:
+              if (!this.selected) {
+                _context.next = 9;
+                break;
+              }
 
-            return _context.abrupt('return', _this._clear(true));
+              return _context.abrupt('return', this._clear(true));
 
-          case 9:
-            request = Object.assign({ input: newValue }, _this._config.get('options'));
+            case 9:
+              request = Object.assign({ input: newValue }, this._config.get('options'));
 
-            _this._service.getPlacePredictions(request, function (predictions, status) {
-              if (status !== window.google.maps.places.PlacesServiceStatus.OK) return _this._clear();
-              _this.predictions = predictions;
-              _this.show = true;
-            });
+              this._service.getPlacePredictions(request, function (predictions, status) {
+                if (status !== window.google.maps.places.PlacesServiceStatus.OK) return _this2._clear();
+                _this2.predictions = predictions;
+                _this2.show = true;
+              });
 
-          case 11:
-          case 'end':
-            return _context.stop();
+            case 11:
+            case 'end':
+              return _context.stop();
+          }
         }
-      }, _callee, _this);
-    }))();
-  }
+      }, _callee, this);
+    }));
 
-  blur() {
+    function valueChanged(_x, _x2) {
+      return _ref.apply(this, arguments);
+    }
+
+    return valueChanged;
+  }();
+
+  GooglePlacesAutocomplete.prototype.blur = function blur() {
     this._clear(true);
-  }
+  };
 
-  focus() {
+  GooglePlacesAutocomplete.prototype.focus = function focus() {
     this._clear(true, true);
-  }
+  };
 
-  keydown(event) {
+  GooglePlacesAutocomplete.prototype.keydown = function keydown(event) {
+    var _this3 = this;
+
     if (this.selected) this.selected = false;
     if (!this.show) return true;
     switch (event.keyCode) {
       case 13:
         this.index !== -1 ? this.select(this.predictions[this.index], false) : this.show = false;
-        setTimeout(() => this._element.firstElementChild.blur(), 100);
+        setTimeout(function () {
+          return _this3._element.firstElementChild.blur();
+        }, 100);
         break;
       case 27:
         this.show = false;break;
@@ -175,79 +193,97 @@ let GooglePlacesAutocomplete = exports.GooglePlacesAutocomplete = (_dec = (0, _a
         return false;
     }
     return true;
-  }
+  };
 
-  select(prediction) {
-    let submit = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
+  GooglePlacesAutocomplete.prototype.select = function select(prediction) {
+    var _this4 = this;
+
+    var submit = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
 
     this.value = prediction.description;
     this.selected = true;
-    if (submit) setTimeout(() => this._dispatchEvent(), 100);
+    if (submit) setTimeout(function () {
+      return _this4._dispatchEvent();
+    }, 100);
     this._clear(true);
-  }
+  };
 
-  _clear() {
-    let keep = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
-    let show = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+  GooglePlacesAutocomplete.prototype._clear = function _clear() {
+    var keep = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+    var show = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
 
     if (!keep) this.predictions = [];
     this.index = -1;
     this.show = show;
-  }
+  };
 
-  _dispatchEvent() {
+  GooglePlacesAutocomplete.prototype._dispatchEvent = function _dispatchEvent() {
     if (!this._element.firstElementChild.form.attributes['submit.delegate']) return;
-    let customEvent;
+    var customEvent = void 0;
     if (window.CustomEvent) customEvent = new CustomEvent('submit', { bubbles: true, detail: event });else {
       customEvent = document.createEvent('CustomEvent');
       customEvent.initCustomEvent('submit', true, true, { data: event });
     }
     this._element.firstElementChild.form.dispatchEvent(customEvent);
     this._element.firstElementChild.blur();
-  }
+  };
 
-  _initialize() {
-    var _this2 = this;
-
-    return _asyncToGenerator(regeneratorRuntime.mark(function _callee2() {
+  GooglePlacesAutocomplete.prototype._initialize = function () {
+    var _ref2 = _asyncToGenerator(regeneratorRuntime.mark(function _callee2() {
       return regeneratorRuntime.wrap(function _callee2$(_context2) {
-        while (1) switch (_context2.prev = _context2.next) {
-          case 0:
-            _context2.next = 2;
-            return _this2._scriptPromise;
+        while (1) {
+          switch (_context2.prev = _context2.next) {
+            case 0:
+              _context2.next = 2;
+              return this._scriptPromise;
 
-          case 2:
-            _this2._service = new window.google.maps.places.AutocompleteService();
-            _this2._serviceResolve();
-            _this2.disabled = false;
+            case 2:
+              this._service = new window.google.maps.places.AutocompleteService();
+              this._serviceResolve();
+              this.disabled = false;
 
-          case 5:
-          case 'end':
-            return _context2.stop();
+            case 5:
+            case 'end':
+              return _context2.stop();
+          }
         }
-      }, _callee2, _this2);
-    }))();
-  }
+      }, _callee2, this);
+    }));
 
-  _loadApiScript() {
+    function _initialize() {
+      return _ref2.apply(this, arguments);
+    }
+
+    return _initialize;
+  }();
+
+  GooglePlacesAutocomplete.prototype._loadApiScript = function _loadApiScript() {
+    var _this5 = this;
+
     if (this._scriptPromise) return;
     if (window.google === undefined || window.google.maps === undefined) {
-      const script = document.createElement('script');
+      var script = document.createElement('script');
       script.async = true;
       script.defer = true;
       script.src = 'https://maps.googleapis.com/maps/api/js?callback=aureliaPluginsGooglePlacesAutocompleteCallback&key=' + this._config.get('key') + '&language=' + this._config.get('language') + '&libraries=' + this._config.get('libraries');
       script.type = 'text/javascript';
       document.body.appendChild(script);
-      this._scriptPromise = new Promise((resolve, reject) => {
-        window.aureliaPluginsGooglePlacesAutocompleteCallback = () => {
-          this._eventAggregator.publish('aurelia-plugins:google-places-autocomplete:api-script-loaded', this._scriptPromise);
+      this._scriptPromise = new Promise(function (resolve, reject) {
+        window.aureliaPluginsGooglePlacesAutocompleteCallback = function () {
+          _this5._eventAggregator.publish('aurelia-plugins:google-places-autocomplete:api-script-loaded', _this5._scriptPromise);
           resolve();
         };
-        script.onerror = error => reject(error);
+        script.onerror = function (error) {
+          return reject(error);
+        };
       });
-    } else if (window.google && window.google.maps) this._scriptPromise = new Promise(resolve => resolve());
-  }
-}, (_descriptor = _applyDecoratedDescriptor(_class2.prototype, 'placeholder', [_aureliaTemplating.bindable], {
+    } else if (window.google && window.google.maps) this._scriptPromise = new Promise(function (resolve) {
+      return resolve();
+    });
+  };
+
+  return GooglePlacesAutocomplete;
+}(), (_descriptor = _applyDecoratedDescriptor(_class2.prototype, 'placeholder', [_aureliaTemplating.bindable], {
   enumerable: true,
   initializer: function initializer() {
     return 'Enter a location';
