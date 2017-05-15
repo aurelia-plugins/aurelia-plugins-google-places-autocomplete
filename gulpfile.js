@@ -25,7 +25,7 @@ modules.forEach(module => {
     gulp.src(paths.js)
       .pipe(babel({
         comments: false,
-        plugins: ['transform-decorators-legacy'],
+        plugins: module === 'es2015' ? ['transform-decorators-legacy'] : ['transform-decorators-legacy', `transform-es2015-modules-${module === 'system' ? 'systemjs' : module}`],
         presets: module === 'es2015' ? ['stage-1'] : [['es2015', { loose: true }], 'stage-1']
       }))
       .pipe(gulp.dest(`${paths.output}${module}`))
