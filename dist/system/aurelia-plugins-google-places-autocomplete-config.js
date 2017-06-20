@@ -24,7 +24,8 @@ System.register([], function (_export, _context) {
             language: 'en',
             libraries: 'places',
             loadApiScript: true,
-            options: { types: ['geocode'] }
+            options: { types: ['geocode'] },
+            region: 'US'
           };
         }
 

@@ -7,7 +7,8 @@ export let Config = class Config {
       language: 'en',
       libraries: 'places',
       loadApiScript: true,
-      options: { types: ['geocode'] }
+      options: { types: ['geocode'] },
+      region: 'US'
     };
   }
 

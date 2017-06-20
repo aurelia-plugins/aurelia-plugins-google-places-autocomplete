@@ -16,7 +16,8 @@ var Config = exports.Config = function () {
       language: 'en',
       libraries: 'places',
       loadApiScript: true,
-      options: { types: ['geocode'] }
+      options: { types: ['geocode'] },
+      region: 'US'
     };
   }
 

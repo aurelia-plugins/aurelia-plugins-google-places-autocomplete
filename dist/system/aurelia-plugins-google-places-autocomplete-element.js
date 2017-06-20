@@ -300,7 +300,7 @@ System.register(['aurelia-binding', 'aurelia-dependency-injection', 'aurelia-eve
             var script = document.createElement('script');
             script.async = true;
             script.defer = true;
-            script.src = 'https://maps.googleapis.com/maps/api/js?callback=aureliaPluginsGooglePlacesAutocompleteCallback&key=' + this._config.get('key') + '&language=' + this._config.get('language') + '&libraries=' + this._config.get('libraries');
+            script.src = 'https://maps.googleapis.com/maps/api/js?callback=aureliaPluginsGooglePlacesAutocompleteCallback&key=' + this._config.get('key') + '&language=' + this._config.get('language') + '&libraries=' + this._config.get('libraries') + '&region=' + this._config.get('region');
             script.type = 'text/javascript';
             document.body.appendChild(script);
             this._scriptPromise = new Promise(function (resolve, reject) {
