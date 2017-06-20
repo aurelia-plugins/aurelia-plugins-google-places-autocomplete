@@ -44,7 +44,8 @@ export async function configure(aurelia) {
         language: 'nl', // see https://developers.google.com/maps/documentation/javascript/localization
         libraries: 'places', // see https://developers.google.com/maps/documentation/javascript/libraries
         loadApiScript: true|false, // whether or not the <script> tag of the Google Maps API should be loaded
-        options: { types: ['geocode'] } // see https://developers.google.com/maps/documentation/javascript/places-autocomplete#add_autocomplete
+        options: { types: ['geocode'] }, // see https://developers.google.com/maps/documentation/javascript/places-autocomplete#add_autocomplete
+        region: 'US' // see https://developers.google.com/maps/documentation/javascript/localization#Region
       });
     });
 
