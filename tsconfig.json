@@ -1,0 +1,20 @@
+{
+  "compilerOptions": {
+    "declaration": true,
+    "emitDecoratorMetadata": false,
+    "experimentalDecorators": true,
+    "lib": ["es2015", "dom"],
+    "listFiles": true,
+    "module": "es2015",
+    "moduleResolution": "node",
+    "preserveConstEnums": true,
+    "removeComments": false,
+    "stripInternal": true,
+    "target": "es2015"
+  },
+  "exclude": [
+    ".idea",
+    "dist",
+    "node_modules"
+  ]
+}
