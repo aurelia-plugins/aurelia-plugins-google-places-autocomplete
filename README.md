@@ -106,5 +106,5 @@ The other attributes that can be used on `<aup-google-places-autocomplete></aup-
 * `selectClass`: The CSS class added to the selected item in the autocomplete when using up and down keys.
 
 ```html
-<aup-google-places-autocomplete placeholder="Enter a location" selectClass="highlight" value.bind="value"></aup-google-places-autocomplete>
+<aup-google-places-autocomplete placeholder="Enter a location" select-class="highlight" value.bind="value"></aup-google-places-autocomplete>
 ```

@@ -216,7 +216,7 @@ var GooglePlacesAutocomplete = exports.GooglePlacesAutocomplete = (_dec = (0, _a
 
     if (!keep) this.predictions = [];
     this.index = -1;
-    this.show = show;
+    this.show = show && this.predictions.length;
   };
 
   GooglePlacesAutocomplete.prototype._dispatchEvent = function _dispatchEvent() {

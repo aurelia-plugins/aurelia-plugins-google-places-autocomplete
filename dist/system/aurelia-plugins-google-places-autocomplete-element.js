@@ -249,7 +249,7 @@ System.register(['aurelia-binding', 'aurelia-dependency-injection', 'aurelia-eve
 
           if (!keep) this.predictions = [];
           this.index = -1;
-          this.show = show;
+          this.show = show && this.predictions.length;
         };
 
         GooglePlacesAutocomplete.prototype._dispatchEvent = function _dispatchEvent() {

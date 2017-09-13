@@ -104,7 +104,7 @@ export class GooglePlacesAutocomplete {
   _clear(keep = false, show = false) {
     if (!keep) this.predictions = [];
     this.index = -1;
-    this.show = show;
+    this.show = show && this.predictions.length;
   }
 
   _dispatchEvent() {
