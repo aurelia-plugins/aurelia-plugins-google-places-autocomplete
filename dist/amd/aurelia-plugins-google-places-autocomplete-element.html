@@ -1,4 +1,4 @@
-<template>
+<template class="${ show ? 'open' : 'closed' }">
   <input autocomplete="off" blur.trigger="blur()" disabled.bind="disabled" focus.trigger="focus()" keydown.delegate="keydown($event)" placeholder.bind="placeholder" type="text" value.bind="value" />
   <ul class="list-unstyled" if.bind="show">
     <li class="${$index === index ? selectClass : ''} font-small p-x-8 p-y-2" innerHTML.bind="prediction.innerHTML" mousedown.delegate="select(prediction)" repeat.for="prediction of predictions | highlight"></li>
