@@ -13,7 +13,7 @@
   "homepage": "https://github.com/aurelia-plugins/aurelia-plugins-google-places-autocomplete",
   "license": "MIT",
   "authors": [
-    "Bart Lenaerts <bart@itprosolutions.be> (http://itprosolutions.be/)"
+    "Bart Lenaerts <bart@codious.be> (http://codious.be/)"
   ],
   "moduleType": "node",
   "main": "dist/commonjs/aurelia-plugins-google-places-autocomplete.js",
