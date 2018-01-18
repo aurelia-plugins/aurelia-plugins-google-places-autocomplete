@@ -200,7 +200,7 @@ define(['exports', 'aurelia-binding', 'aurelia-dependency-injection', 'aurelia-e
       if (!this.show) return true;
       switch (event.keyCode) {
         case 13:
-          this.index !== -1 ? this.select(this.predictions[this.index], false) : this.show = false;
+          this.index !== -1 ? this.select(this.predictions[this.index], event, false) : this.show = false;
           setTimeout(function () {
             return _this3._element.firstElementChild.blur();
           }, 100);
@@ -219,15 +219,15 @@ define(['exports', 'aurelia-binding', 'aurelia-dependency-injection', 'aurelia-e
       return true;
     };
 
-    GooglePlacesAutocomplete.prototype.select = function select(prediction) {
+    GooglePlacesAutocomplete.prototype.select = function select(prediction, event) {
       var _this4 = this;
 
-      var submit = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
+      var submit = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;
 
       this.value = prediction.description;
       this.selected = true;
       if (submit) setTimeout(function () {
-        return _this4._dispatchEvent();
+        return _this4._dispatchEvent(event);
       }, 100);
       this._clear(true);
     };
@@ -241,7 +241,7 @@ define(['exports', 'aurelia-binding', 'aurelia-dependency-injection', 'aurelia-e
       this.show = show && this.predictions.length;
     };
 
-    GooglePlacesAutocomplete.prototype._dispatchEvent = function _dispatchEvent() {
+    GooglePlacesAutocomplete.prototype._dispatchEvent = function _dispatchEvent(event) {
       if (!this._element.firstElementChild.form.attributes['submit.delegate']) return;
       var customEvent = void 0;
       if (window.CustomEvent) customEvent = new CustomEvent('submit', { bubbles: true, detail: event });else {

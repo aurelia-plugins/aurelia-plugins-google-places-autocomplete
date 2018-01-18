@@ -20,9 +20,9 @@ export declare class GooglePlacesAutocomplete {
     blur(): void;
     focus(): void;
     keydown(event: any): boolean;
-    select(prediction: any, submit?: boolean): void;
+    select(prediction: any, event: any, submit?: boolean): void;
     _clear(keep?: boolean, show?: boolean): void;
-    _dispatchEvent(): void;
+    _dispatchEvent(event: any): void;
     _initialize(): Promise<void>;
     _loadApiScript(): void;
 }

@@ -119,7 +119,7 @@ export let GooglePlacesAutocomplete = (_dec = customElement('aup-google-places-a
     if (!this.show) return true;
     switch (event.keyCode) {
       case 13:
-        this.index !== -1 ? this.select(this.predictions[this.index], false) : this.show = false;
+        this.index !== -1 ? this.select(this.predictions[this.index], event, false) : this.show = false;
         setTimeout(() => this._element.firstElementChild.blur(), 100);
         break;
       case 27:
@@ -136,10 +136,10 @@ export let GooglePlacesAutocomplete = (_dec = customElement('aup-google-places-a
     return true;
   }
 
-  select(prediction, submit = true) {
+  select(prediction, event, submit = true) {
     this.value = prediction.description;
     this.selected = true;
-    if (submit) setTimeout(() => this._dispatchEvent(), 100);
+    if (submit) setTimeout(() => this._dispatchEvent(event), 100);
     this._clear(true);
   }
 
@@ -149,7 +149,7 @@ export let GooglePlacesAutocomplete = (_dec = customElement('aup-google-places-a
     this.show = show && this.predictions.length;
   }
 
-  _dispatchEvent() {
+  _dispatchEvent(event) {
     if (!this._element.firstElementChild.form.attributes['submit.delegate']) return;
     let customEvent;
     if (window.CustomEvent) customEvent = new CustomEvent('submit', { bubbles: true, detail: event });else {
