@@ -255,7 +255,7 @@ System.register(['aurelia-binding', 'aurelia-dependency-injection', 'aurelia-eve
         GooglePlacesAutocomplete.prototype._dispatchEvent = function _dispatchEvent(event) {
           if (!this._element.firstElementChild.form.attributes['submit.delegate']) return;
           var customEvent = void 0;
-          if (window.CustomEvent) customEvent = new CustomEvent('submit', { bubbles: true, detail: event });else {
+          if (window.CustomEvent) customEvent = new CustomEvent('submit', { bubbles: true, cancelable: true, detail: event });else {
             customEvent = document.createEvent('CustomEvent');
             customEvent.initCustomEvent('submit', true, true, { data: event });
           }

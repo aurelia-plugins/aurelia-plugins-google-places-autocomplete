@@ -111,7 +111,7 @@ export class GooglePlacesAutocomplete {
     if (!this._element.firstElementChild.form.attributes['submit.delegate']) return;
     let customEvent;
     if (window.CustomEvent)
-      customEvent = new CustomEvent('submit', { bubbles: true, detail: event });
+      customEvent = new CustomEvent('submit', { bubbles: true, cancelable: true, detail: event });
     else {
       customEvent = document.createEvent('CustomEvent');
       customEvent.initCustomEvent('submit', true, true, { data: event });
