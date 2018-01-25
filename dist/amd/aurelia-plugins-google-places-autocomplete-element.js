@@ -126,7 +126,7 @@ define(['exports', 'aurelia-binding', 'aurelia-dependency-injection', 'aurelia-e
     }
 
     GooglePlacesAutocomplete.prototype.valueChanged = function () {
-      var _ref = _asyncToGenerator(regeneratorRuntime.mark(function _callee(newValue, oldValue) {
+      var _ref = _asyncToGenerator(regeneratorRuntime.mark(function _callee(newValue) {
         var _this2 = this;
 
         var request;
@@ -178,7 +178,7 @@ define(['exports', 'aurelia-binding', 'aurelia-dependency-injection', 'aurelia-e
         }, _callee, this);
       }));
 
-      function valueChanged(_x, _x2) {
+      function valueChanged(_x) {
         return _ref.apply(this, arguments);
       }
 
@@ -187,6 +187,10 @@ define(['exports', 'aurelia-binding', 'aurelia-dependency-injection', 'aurelia-e
 
     GooglePlacesAutocomplete.prototype.blur = function blur() {
       this._clear(true);
+    };
+
+    GooglePlacesAutocomplete.prototype.clear = function clear() {
+      this.value = undefined;
     };
 
     GooglePlacesAutocomplete.prototype.focus = function focus() {

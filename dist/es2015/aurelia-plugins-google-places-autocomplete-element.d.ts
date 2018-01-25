@@ -16,8 +16,9 @@ export declare class GooglePlacesAutocomplete {
     selected: boolean;
     show: boolean;
     constructor(element: any, config: any, eventAggregator: any);
-    valueChanged(newValue: any, oldValue: any): Promise<void>;
+    valueChanged(newValue: any): Promise<void>;
     blur(): void;
+    clear(): void;
     focus(): void;
     keydown(event: any): boolean;
     select(prediction: any, event: any, submit?: boolean): void;

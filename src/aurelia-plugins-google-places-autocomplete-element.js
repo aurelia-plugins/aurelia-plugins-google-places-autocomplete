@@ -50,7 +50,7 @@ export class GooglePlacesAutocomplete {
   }
 
   // BINDABLE METHODS
-  async valueChanged(newValue, oldValue) {
+  async valueChanged(newValue) {
     await this._servicePromise;
     if (!this._initialized) { this._initialized = true; return; }
     if (!newValue) return this._clear();
@@ -66,6 +66,10 @@ export class GooglePlacesAutocomplete {
   // PUBLIC METHODS
   blur() {
     this._clear(true);
+  }
+
+  clear() {
+    this.value = undefined;
   }
 
   focus() {

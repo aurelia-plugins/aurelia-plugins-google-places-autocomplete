@@ -104,7 +104,7 @@ var GooglePlacesAutocomplete = exports.GooglePlacesAutocomplete = (_dec = (0, _a
   }
 
   GooglePlacesAutocomplete.prototype.valueChanged = function () {
-    var _ref = _asyncToGenerator(regeneratorRuntime.mark(function _callee(newValue, oldValue) {
+    var _ref = _asyncToGenerator(regeneratorRuntime.mark(function _callee(newValue) {
       var _this2 = this;
 
       var request;
@@ -156,7 +156,7 @@ var GooglePlacesAutocomplete = exports.GooglePlacesAutocomplete = (_dec = (0, _a
       }, _callee, this);
     }));
 
-    function valueChanged(_x, _x2) {
+    function valueChanged(_x) {
       return _ref.apply(this, arguments);
     }
 
@@ -165,6 +165,10 @@ var GooglePlacesAutocomplete = exports.GooglePlacesAutocomplete = (_dec = (0, _a
 
   GooglePlacesAutocomplete.prototype.blur = function blur() {
     this._clear(true);
+  };
+
+  GooglePlacesAutocomplete.prototype.clear = function clear() {
+    this.value = undefined;
   };
 
   GooglePlacesAutocomplete.prototype.focus = function focus() {

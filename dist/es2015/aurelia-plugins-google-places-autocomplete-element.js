@@ -87,7 +87,7 @@ export let GooglePlacesAutocomplete = (_dec = customElement('aup-google-places-a
     });
   }
 
-  valueChanged(newValue, oldValue) {
+  valueChanged(newValue) {
     var _this = this;
 
     return _asyncToGenerator(function* () {
@@ -108,6 +108,10 @@ export let GooglePlacesAutocomplete = (_dec = customElement('aup-google-places-a
 
   blur() {
     this._clear(true);
+  }
+
+  clear() {
+    this.value = undefined;
   }
 
   focus() {
