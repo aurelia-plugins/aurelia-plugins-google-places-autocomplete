@@ -1,7 +1,7 @@
 <template class="${ show ? 'open' : 'closed' }">
   <div>
     <input autocomplete="off" blur.trigger="blur()" disabled.bind="disabled" focus.trigger="focus()" keydown.delegate="keydown($event)" placeholder.bind="placeholder" type="text" value.bind="value" />
-    <button click.delegate="clear()" if.bind="value">&times;</button>
+    <button click.delegate="clear()" if.bind="value" type="button">&times;</button>
   </div>
   <ul class="list-unstyled" if.bind="show">
     <li class="${$index === index ? selectClass : ''}" innerHTML.bind="prediction.innerHTML" mousedown.delegate="select(prediction, $event)" repeat.for="prediction of predictions | highlight"></li>

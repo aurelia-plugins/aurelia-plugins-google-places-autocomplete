@@ -206,7 +206,7 @@ define(['exports', 'aurelia-binding', 'aurelia-dependency-injection', 'aurelia-e
         case 13:
           this.index !== -1 ? this.select(this.predictions[this.index], event, false) : this.show = false;
           setTimeout(function () {
-            return _this3._element.firstElementChild.blur();
+            return _this3._element.firstElementChild.firstElementChild.blur();
           }, 100);
           break;
         case 27:
@@ -246,14 +246,14 @@ define(['exports', 'aurelia-binding', 'aurelia-dependency-injection', 'aurelia-e
     };
 
     GooglePlacesAutocomplete.prototype._dispatchEvent = function _dispatchEvent(event) {
-      if (!this._element.firstElementChild.form.attributes['submit.delegate']) return;
+      if (!this._element.firstElementChild.firstElementChild.form.attributes['submit.delegate']) return;
       var customEvent = void 0;
       if (window.CustomEvent) customEvent = new CustomEvent('submit', { bubbles: true, cancelable: true, detail: event });else {
         customEvent = document.createEvent('CustomEvent');
         customEvent.initCustomEvent('submit', true, true, { data: event });
       }
-      this._element.firstElementChild.form.dispatchEvent(customEvent);
-      this._element.firstElementChild.blur();
+      this._element.firstElementChild.firstElementChild.form.dispatchEvent(customEvent);
+      this._element.firstElementChild.firstElementChild.blur();
     };
 
     GooglePlacesAutocomplete.prototype._initialize = function () {
