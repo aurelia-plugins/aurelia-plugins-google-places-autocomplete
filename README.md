@@ -14,6 +14,16 @@ Make sure you have the **Google Places API Web Service** activated in the Google
 npm install aurelia-plugins-google-places-autocomplete --save
 ```
 
+When using Aurelia CLI add the following dependency to `aurelia.json`:
+
+```json
+{
+  "name": "aurelia-plugins-google-places-autocomplete",
+  "path": "../node_modules/aurelia-plugins-google-places-autocomplete/dist/amd",
+  "main": "aurelia-plugins-google-places-autocomplete"
+}
+```
+
 Add `node_modules/babel-polyfill/dist/polyfill.min.js` to the prepend list in `aurelia.json`. Do not forgot to add `babel-polyfill` to the dependencies in `package.json`.
 
 **JSPM**
