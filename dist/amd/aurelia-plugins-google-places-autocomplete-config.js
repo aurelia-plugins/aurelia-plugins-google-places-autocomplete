@@ -26,6 +26,10 @@ define(['exports'], function (exports) {
       };
     }
 
+    Config.prototype.all = function all() {
+      return this._config;
+    };
+
     Config.prototype.get = function get(key) {
       return this._config[key];
     };

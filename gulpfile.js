@@ -1,7 +1,6 @@
 // REQUIRES
 const babel = require('gulp-babel');
 const del = require('del');
-const fs = require('fs');
 const gulp = require('gulp');
 const rename = require('gulp-rename');
 const run = require('run-sequence');
@@ -28,7 +27,7 @@ modules.forEach(module => {
       .pipe(babel({
         comments: false,
         plugins: module === 'es2015' ? ['transform-decorators-legacy'] : ['transform-decorators-legacy', `transform-es2015-modules-${module === 'system' ? 'systemjs' : module}`],
-        presets: module === 'es2015' ? ['stage-1'] : [['es2015', { loose: true }], 'stage-1']
+        presets: module === 'es2015' ? ['stage-1'] : [['env', { loose: true }], 'stage-1']
       }))
       .pipe(gulp.dest(`${paths.output}${module}`))
   );

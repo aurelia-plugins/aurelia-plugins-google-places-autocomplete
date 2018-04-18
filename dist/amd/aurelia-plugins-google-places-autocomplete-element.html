@@ -1,4 +1,4 @@
-<template class="${ show ? 'open' : 'closed' }">
+<template class="${show ? 'open' : 'closed'}">
   <div>
     <input autocomplete="off" blur.trigger="blur()" disabled.bind="disabled" focus.trigger="focus()" keydown.delegate="keydown($event)" placeholder.bind="placeholder" type="text" value.bind="value" />
     <button click.delegate="clear()" if.bind="value" type="button">&times;</button>

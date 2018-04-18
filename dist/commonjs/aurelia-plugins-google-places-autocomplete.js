@@ -12,5 +12,5 @@ var _aureliaPluginsGooglePlacesAutocompleteConfig = require('./aurelia-plugins-g
 function configure(aurelia, configCallback) {
   var instance = aurelia.container.get(_aureliaPluginsGooglePlacesAutocompleteConfig.Config);
   if (configCallback !== undefined && typeof configCallback === 'function') configCallback(instance);
-  aurelia.globalResources(_aureliaPal.PLATFORM.moduleName('./aurelia-plugins-google-places-autocomplete-converter'), _aureliaPal.PLATFORM.moduleName('./aurelia-plugins-google-places-autocomplete-element'));
+  aurelia.globalResources([_aureliaPal.PLATFORM.moduleName('./aurelia-plugins-google-places-autocomplete-converter'), _aureliaPal.PLATFORM.moduleName('./aurelia-plugins-google-places-autocomplete-element')]);
 }

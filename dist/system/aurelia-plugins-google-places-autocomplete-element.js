@@ -312,8 +312,8 @@ System.register(['aurelia-binding', 'aurelia-dependency-injection', 'aurelia-eve
                 _this5._eventAggregator.publish('aurelia-plugins:google-places-autocomplete:api-script-loaded', _this5._scriptPromise);
                 resolve();
               };
-              script.onerror = function (error) {
-                return reject(error);
+              script.onerror = function (err) {
+                return reject(err);
               };
             });
           } else if (window.google && window.google.maps) this._scriptPromise = new Promise(function (resolve) {
@@ -330,7 +330,7 @@ System.register(['aurelia-binding', 'aurelia-dependency-injection', 'aurelia-eve
       }), _descriptor2 = _applyDecoratedDescriptor(_class2.prototype, 'selectClass', [bindable], {
         enumerable: true,
         initializer: function initializer() {
-          return 'bg-clouds';
+          return 'selected';
         }
       }), _descriptor3 = _applyDecoratedDescriptor(_class2.prototype, 'value', [_dec3], {
         enumerable: true,

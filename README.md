@@ -14,7 +14,7 @@ Make sure you have the **Google Places API Web Service** activated in the Google
 npm install aurelia-plugins-google-places-autocomplete --save
 ```
 
-When using Aurelia CLI add the following dependency to `aurelia.json`:
+When using Aurelia CLI add the following dependency to `aurelia.json` as described in the [documentation](http://aurelia.io/docs/build-systems/aurelia-cli#adding-client-libraries-to-your-project):
 
 ```json
 {
@@ -25,6 +25,8 @@ When using Aurelia CLI add the following dependency to `aurelia.json`:
 ```
 
 Add `node_modules/babel-polyfill/dist/polyfill.min.js` to the prepend list in `aurelia.json`. Do not forgot to add `babel-polyfill` to the dependencies in `package.json`.
+
+For projects using Webpack, please add `babel-polyfill` to your `webpack.config.js` as documented by [babeljs.io](https://babeljs.io/docs/usage/polyfill/#usage-in-node--browserify--webpack).
 
 **JSPM**
 
@@ -43,13 +45,15 @@ bower install aurelia-plugins-google-places-autocomplete
 Inside of your `main.js` or `main.ts` file simply load the plugin inside of the configure method using `.plugin()`.
 
 ```javascript
+import {PLATFORM} from 'aurelia-framework';
+
 export async function configure(aurelia) {
   aurelia.use
     .standardConfiguration()
     .developmentLogging();
 
   aurelia.use
-    .plugin('aurelia-plugins-google-places-autocomplete', config => {
+    .plugin(PLATFORM.moduleName('aurelia-plugins-google-places-autocomplete'), config => {
       config.options({
         apiScriptLoadedEvent: 'aurelia-plugins:google-maps:api-script-loaded', // if loadApiScript is false, the event that is subscribed to, to know when the Google Maps API is loaded by another plugin
         key: '', // your Google API key retrieved from the Google Developer Console
@@ -61,8 +65,8 @@ export async function configure(aurelia) {
       });
     });
 
-    await aurelia.start();
-    aurelia.setRoot('app');
+  await aurelia.start();
+  aurelia.setRoot('app');
 }
 ```
 

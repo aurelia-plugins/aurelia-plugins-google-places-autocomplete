@@ -28,7 +28,7 @@ export class GooglePlacesAutocomplete {
 
   // BINDABLE PROPERTIES
   @bindable placeholder = 'Enter a location';
-  @bindable selectClass = 'bg-clouds';
+  @bindable selectClass = 'selected';
   @bindable({ defaultBindingMode: bindingMode.twoWay }) value;
 
   // PUBLIC PROPERTIES
@@ -145,7 +145,7 @@ export class GooglePlacesAutocomplete {
           this._eventAggregator.publish('aurelia-plugins:google-places-autocomplete:api-script-loaded', this._scriptPromise);
           resolve();
         };
-        script.onerror = error => reject(error);
+        script.onerror = err => reject(err);
       });
     }
     else if (window.google && window.google.maps)

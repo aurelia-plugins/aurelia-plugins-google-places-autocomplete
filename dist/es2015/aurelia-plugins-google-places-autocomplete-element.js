@@ -189,7 +189,7 @@ export let GooglePlacesAutocomplete = (_dec = customElement('aup-google-places-a
           this._eventAggregator.publish('aurelia-plugins:google-places-autocomplete:api-script-loaded', this._scriptPromise);
           resolve();
         };
-        script.onerror = error => reject(error);
+        script.onerror = err => reject(err);
       });
     } else if (window.google && window.google.maps) this._scriptPromise = new Promise(resolve => resolve());
   }
@@ -201,7 +201,7 @@ export let GooglePlacesAutocomplete = (_dec = customElement('aup-google-places-a
 }), _descriptor2 = _applyDecoratedDescriptor(_class2.prototype, 'selectClass', [bindable], {
   enumerable: true,
   initializer: function () {
-    return 'bg-clouds';
+    return 'selected';
   }
 }), _descriptor3 = _applyDecoratedDescriptor(_class2.prototype, 'value', [_dec3], {
   enumerable: true,
