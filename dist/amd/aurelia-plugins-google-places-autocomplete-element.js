@@ -84,7 +84,7 @@ define(['exports', 'aurelia-binding', 'aurelia-dependency-injection', 'aurelia-e
     throw new Error('Decorating class property failed. Please ensure that transform-class-properties is enabled.');
   }
 
-  var _dec, _dec2, _dec3, _class, _desc, _value, _class2, _descriptor, _descriptor2, _descriptor3;
+  var _dec, _dec2, _dec3, _class, _desc, _value, _class2, _descriptor, _descriptor2, _descriptor3, _descriptor4;
 
   var GooglePlacesAutocomplete = exports.GooglePlacesAutocomplete = (_dec = (0, _aureliaTemplating.customElement)('aup-google-places-autocomplete'), _dec2 = (0, _aureliaDependencyInjection.inject)(Element, _aureliaPluginsGooglePlacesAutocompleteConfig.Config, _aureliaEventAggregator.EventAggregator), _dec3 = (0, _aureliaTemplating.bindable)({ defaultBindingMode: _aureliaBinding.bindingMode.twoWay }), _dec(_class = _dec2(_class = (_class2 = function () {
     function GooglePlacesAutocomplete(element, config, eventAggregator) {
@@ -102,7 +102,9 @@ define(['exports', 'aurelia-binding', 'aurelia-dependency-injection', 'aurelia-e
 
       _initDefineProp(this, 'selectClass', _descriptor2, this);
 
-      _initDefineProp(this, 'value', _descriptor3, this);
+      _initDefineProp(this, 'tabIndex', _descriptor3, this);
+
+      _initDefineProp(this, 'value', _descriptor4, this);
 
       this.disabled = true;
       this.index = -1;
@@ -321,7 +323,12 @@ define(['exports', 'aurelia-binding', 'aurelia-dependency-injection', 'aurelia-e
     initializer: function initializer() {
       return 'selected';
     }
-  }), _descriptor3 = _applyDecoratedDescriptor(_class2.prototype, 'value', [_dec3], {
+  }), _descriptor3 = _applyDecoratedDescriptor(_class2.prototype, 'tabIndex', [_aureliaTemplating.bindable], {
+    enumerable: true,
+    initializer: function initializer() {
+      return 1;
+    }
+  }), _descriptor4 = _applyDecoratedDescriptor(_class2.prototype, 'value', [_dec3], {
     enumerable: true,
     initializer: null
   })), _class2)) || _class) || _class);

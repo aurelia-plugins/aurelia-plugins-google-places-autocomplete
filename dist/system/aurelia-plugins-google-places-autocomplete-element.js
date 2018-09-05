@@ -3,7 +3,7 @@
 System.register(['aurelia-binding', 'aurelia-dependency-injection', 'aurelia-event-aggregator', 'aurelia-templating', './aurelia-plugins-google-places-autocomplete-config'], function (_export, _context) {
   "use strict";
 
-  var bindingMode, inject, EventAggregator, bindable, customElement, Config, _dec, _dec2, _dec3, _class, _desc, _value, _class2, _descriptor, _descriptor2, _descriptor3, GooglePlacesAutocomplete;
+  var bindingMode, inject, EventAggregator, bindable, customElement, Config, _dec, _dec2, _dec3, _class, _desc, _value, _class2, _descriptor, _descriptor2, _descriptor3, _descriptor4, GooglePlacesAutocomplete;
 
   function _asyncToGenerator(fn) {
     return function () {
@@ -113,7 +113,9 @@ System.register(['aurelia-binding', 'aurelia-dependency-injection', 'aurelia-eve
 
           _initDefineProp(this, 'selectClass', _descriptor2, this);
 
-          _initDefineProp(this, 'value', _descriptor3, this);
+          _initDefineProp(this, 'tabIndex', _descriptor3, this);
+
+          _initDefineProp(this, 'value', _descriptor4, this);
 
           this.disabled = true;
           this.index = -1;
@@ -332,7 +334,12 @@ System.register(['aurelia-binding', 'aurelia-dependency-injection', 'aurelia-eve
         initializer: function initializer() {
           return 'selected';
         }
-      }), _descriptor3 = _applyDecoratedDescriptor(_class2.prototype, 'value', [_dec3], {
+      }), _descriptor3 = _applyDecoratedDescriptor(_class2.prototype, 'tabIndex', [bindable], {
+        enumerable: true,
+        initializer: function initializer() {
+          return 1;
+        }
+      }), _descriptor4 = _applyDecoratedDescriptor(_class2.prototype, 'value', [_dec3], {
         enumerable: true,
         initializer: null
       })), _class2)) || _class) || _class));

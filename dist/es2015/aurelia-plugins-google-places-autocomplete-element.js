@@ -1,4 +1,4 @@
-var _dec, _dec2, _dec3, _class, _desc, _value, _class2, _descriptor, _descriptor2, _descriptor3;
+var _dec, _dec2, _dec3, _class, _desc, _value, _class2, _descriptor, _descriptor2, _descriptor3, _descriptor4;
 
 function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
 
@@ -64,7 +64,9 @@ export let GooglePlacesAutocomplete = (_dec = customElement('aup-google-places-a
 
     _initDefineProp(this, 'selectClass', _descriptor2, this);
 
-    _initDefineProp(this, 'value', _descriptor3, this);
+    _initDefineProp(this, 'tabIndex', _descriptor3, this);
+
+    _initDefineProp(this, 'value', _descriptor4, this);
 
     this.disabled = true;
     this.index = -1;
@@ -203,7 +205,12 @@ export let GooglePlacesAutocomplete = (_dec = customElement('aup-google-places-a
   initializer: function () {
     return 'selected';
   }
-}), _descriptor3 = _applyDecoratedDescriptor(_class2.prototype, 'value', [_dec3], {
+}), _descriptor3 = _applyDecoratedDescriptor(_class2.prototype, 'tabIndex', [bindable], {
+  enumerable: true,
+  initializer: function () {
+    return 1;
+  }
+}), _descriptor4 = _applyDecoratedDescriptor(_class2.prototype, 'value', [_dec3], {
   enumerable: true,
   initializer: null
 })), _class2)) || _class) || _class);

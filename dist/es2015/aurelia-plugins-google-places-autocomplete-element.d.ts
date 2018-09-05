@@ -9,6 +9,7 @@ export declare class GooglePlacesAutocomplete {
     _serviceResolve: any;
     placeholder: string;
     selectClass: string;
+    tabIndex: number;
     value: any;
     disabled: boolean;
     index: number;

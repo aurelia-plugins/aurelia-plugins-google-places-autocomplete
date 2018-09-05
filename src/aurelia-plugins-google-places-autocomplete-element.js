@@ -29,6 +29,7 @@ export class GooglePlacesAutocomplete {
   // BINDABLE PROPERTIES
   @bindable placeholder = 'Enter a location';
   @bindable selectClass = 'selected';
+  @bindable tabIndex = 1;
   @bindable({ defaultBindingMode: bindingMode.twoWay }) value;
 
   // PUBLIC PROPERTIES
